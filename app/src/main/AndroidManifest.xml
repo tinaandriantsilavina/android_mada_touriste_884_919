@@ -15,6 +15,12 @@
         android:theme="@style/Theme.Madatouriste"
         tools:targetApi="31">
         <activity
+            android:name=".vue.InscriptionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".vue.LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".vue.ProvinceDetailActivity"
             android:exported="false" />
         <activity

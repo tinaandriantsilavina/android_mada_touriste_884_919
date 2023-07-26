@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         HashMap<String,Province> map = new HashMap<>();
         map.put("pers1", new Province());
         map.put("pers2", new Province());
-        Utils.ecouteMenu(this,this.buttonMenulogin, ProvinceActivity.class, map );
+        Utils.ecouteMenu(this,this.buttonMenulogin, LoginActivity.class, map );
     }
 
     /**
