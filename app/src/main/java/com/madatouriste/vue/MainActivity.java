@@ -1,10 +1,11 @@
-package com.madatouriste;
+package com.madatouriste.vue;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.madatouriste.R;
 
 public class MainActivity extends AppCompatActivity {
 
