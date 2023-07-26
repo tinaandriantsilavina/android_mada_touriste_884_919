@@ -101,7 +101,7 @@ public  abstract class Utils {
                     intent.putExtra(entry.getKey(), (Serializable) entry.getValue());
                 }
 
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // fermer tout autre activity
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // fermer tout autre activity
                 context.startActivity(intent);
             }
         });
