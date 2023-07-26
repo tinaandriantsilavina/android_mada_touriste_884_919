@@ -5,8 +5,17 @@ import java.util.ArrayList;
 
 public class Province implements Serializable {
     private Integer id;
-    private String nom, description;
+    private String nom, description, imageUrl;
     private ArrayList<String> images;
+
+    public Province() {
+    }
+
+    public Province(String nom, String imageUrl) {
+        this.id = 1;
+        this.nom = nom;
+        this.imageUrl = imageUrl;
+    }
 
     public Integer getId() {
         return id;
@@ -38,5 +47,13 @@ public class Province implements Serializable {
 
     public void setImages(ArrayList<String> images) {
         this.images = images;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

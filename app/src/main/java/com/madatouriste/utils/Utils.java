@@ -14,6 +14,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -158,5 +159,23 @@ public  abstract class Utils {
             }
         }
         return text;
+    }
+
+    public static ArrayList<String> getImage(){
+        String url ="http://192.168.56.1/";
+        ArrayList<String> imageObjects = new ArrayList<String>();
+        imageObjects.add( url+"01.png");
+        imageObjects.add(url+"02.png");
+        imageObjects.add( url+"03.png");
+        imageObjects.add(url+"04.png");
+        imageObjects.add(url+"05.png");
+        imageObjects.add(url+"06.png");
+        imageObjects.add(url+"07.png");
+//        imageObjects.add(url+"08.png");
+//        imageObjects.add(url+"09.png");
+//        imageObjects.add(url+"10.png");
+//        imageObjects.add(url+"11.png");
+//        imageObjects.add(url+"12.png");
+        return imageObjects;
     }
 }

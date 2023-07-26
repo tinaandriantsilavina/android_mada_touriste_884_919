@@ -38,13 +38,10 @@ public class MainActivity extends AppCompatActivity {
         this.buttonHistorique =(ImageButton) findViewById(R.id.btnMenuHistorique);
         this.buttonMenulogin = (ImageButton) findViewById(R.id.btnMenuLogin);
 
-//        ecouteMenu(this.buttonIMG, CalculActivity.class);
-//        ecouteMenu(this.buttonMenulogin, ProvinceActivity.class);
-//        ecouteMenu(this.buttonHistorique, HistoActivity.class);
         HashMap<String,Province> map = new HashMap<>();
         map.put("pers1", new Province());
         map.put("pers2", new Province());
-        Utils.ecouteMenu(this,this.buttonMenulogin, ImageGallerieActivity.class, map );
+        Utils.ecouteMenu(this,this.buttonMenulogin, ProvinceActivity.class, map );
     }
 
     /**
