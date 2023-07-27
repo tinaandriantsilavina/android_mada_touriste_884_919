@@ -1,11 +1,19 @@
 package com.madatouriste.utils;
 
+import android.Manifest;
+import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.util.Log;
 import android.view.View;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.madatouriste.R;
 
 import org.json.JSONArray;
 
@@ -177,5 +185,38 @@ public  abstract class Utils {
 //        imageObjects.add(url+"11.png");
 //        imageObjects.add(url+"12.png");
         return imageObjects;
+    }
+
+
+    public static void sendNotif1(Context context,String title, String message) {
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+        Notification notification = new NotificationCompat.Builder(context, App.CHANNEL_1_ID)
+                .setSmallIcon(R.drawable.logout_icon)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .build();
+
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        notificationManager.notify(1, notification);
+    }
+
+    public static void sendNotif2(Context context,String title, String message) {
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+        Notification notification = new NotificationCompat.Builder(context, App.CHANNEL_2_ID)
+                .setSmallIcon(R.drawable.logout_icon)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setPriority(NotificationCompat.PRIORITY_LOW)
+                .build();
+
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        notificationManager.notify(2, notification);
     }
 }
