@@ -16,9 +16,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.madatouriste.R;
 import com.madatouriste.adapter.ImageAdapter;
+import com.madatouriste.utils.Utils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ImageGallerieActivity extends AppCompatActivity {
@@ -33,20 +33,7 @@ public class ImageGallerieActivity extends AppCompatActivity {
     }
 
     public void init(){
-        String url ="http://192.168.56.1/";
-        ArrayList<String> imageObjects = new ArrayList<String>();
-        imageObjects.add( url+"01.png");
-        imageObjects.add(url+"02.png");
-        imageObjects.add( url+"03.png");
-        imageObjects.add(url+"04.png");
-        imageObjects.add(url+"05.png");
-        imageObjects.add(url+"06.png");
-        imageObjects.add(url+"07.png");
-        imageObjects.add(url+"08.png");
-        imageObjects.add(url+"09.png");
-        imageObjects.add(url+"10.png");
-        imageObjects.add(url+"11.png");
-        imageObjects.add(url+"12.png");
+        ArrayList<String> imageObjects = Utils.getImage();
 
         GridView gridView = findViewById(R.id.myGrid);
         gridView.setAdapter(new ImageAdapter(imageObjects, this));
@@ -64,7 +51,7 @@ public class ImageGallerieActivity extends AppCompatActivity {
 
     public void showDialogBox(String imageUrl) {
         final Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.custom_layout);
+        dialog.setContentView(R.layout.fragment_layout);
 
         // Getting custom dialog views
         TextView Image_name = dialog.findViewById(R.id.txt_Image_name);

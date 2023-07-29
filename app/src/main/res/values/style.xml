@@ -8,4 +8,26 @@
         <item name="colorPrimaryDark">@color/secondary</item>
         <item name="colorAccent">@color/black</item>
     </style>
+
+    <style name="Circular">
+        <item name="cornerSize">50%</item>
+
+    </style>
+
+    <style name="BottomNavigation">
+        <item name="android:background">@drawable/shadow</item>
+        <item name="backgroundTint">@null</item>
+        <item name="elevation">@dimen/m3_sys_elevation_level2</item>
+        <item name="itemTextAppearanceInactive">?attr/textAppearanceCaption</item>
+        <item name="itemTextAppearanceActive">?attr/textAppearanceCaption</item>
+        <item name="itemRippleColor">@color/primary</item>
+        <item name="itemIconTint">@color/secondary</item>
+        <item name="itemTextColor">@color/mtrl_navigation_bar_colored_item_tint</item>
+        <item name="itemPaddingTop">5dp</item>
+        <item name="itemPaddingBottom">@dimen/m3_bottom_nav_item_padding_bottom</item>
+        <item name="android:minHeight">@dimen/m3_bottom_nav_min_height</item>
+        <item name="enforceTextAppearance">true</item>
+        <item name="enforceMaterialTheme">true</item>
+        <item name="labelVisibilityMode">unlabeled</item>
+    </style>
 </resources>

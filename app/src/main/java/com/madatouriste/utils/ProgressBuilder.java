@@ -23,7 +23,7 @@ public class ProgressBuilder {
         dialog.getWindow().setBackgroundDrawable(
                 context.getResources().getDrawable(
                         R.drawable.dialog_progress_background));
-        dialog.setContentView(R.layout.dialog_spinner);
+        dialog.setContentView(R.layout.fragment_dialog_spinner);
         dialog.setCancelable(false);
         dialog.show();
     }

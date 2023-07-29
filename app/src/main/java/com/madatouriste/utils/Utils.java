@@ -1,11 +1,24 @@
 package com.madatouriste.utils;
 
+import android.Manifest;
+import android.app.Dialog;
+import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.madatouriste.R;
 
 import org.json.JSONArray;
 
@@ -14,6 +27,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -158,5 +172,73 @@ public  abstract class Utils {
             }
         }
         return text;
+    }
+
+    public static ArrayList<String> getImage(){
+        String url ="http://192.168.56.1/";
+        ArrayList<String> imageObjects = new ArrayList<String>();
+        imageObjects.add( url+"01.png");
+        imageObjects.add(url+"02.png");
+        imageObjects.add( url+"03.png");
+        imageObjects.add(url+"04.png");
+        imageObjects.add(url+"05.png");
+        imageObjects.add(url+"06.png");
+        imageObjects.add(url+"07.png");
+//        imageObjects.add(url+"08.png");
+//        imageObjects.add(url+"09.png");
+//        imageObjects.add(url+"10.png");
+//        imageObjects.add(url+"11.png");
+//        imageObjects.add(url+"12.png");
+        return imageObjects;
+    }
+
+
+    public static void sendNotif1(Context context,String title, String message) {
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+        Notification notification = new NotificationCompat.Builder(context, App.CHANNEL_1_ID)
+                .setSmallIcon(R.drawable.logout_icon)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .build();
+
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        notificationManager.notify(1, notification);
+    }
+
+    public static void sendNotif2(Context context,String title, String message) {
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+        Notification notification = new NotificationCompat.Builder(context, App.CHANNEL_2_ID)
+                .setSmallIcon(R.drawable.logout_icon)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setPriority(NotificationCompat.PRIORITY_LOW)
+                .build();
+
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        notificationManager.notify(2, notification);
+    }
+
+    public static void ShowPopup(Context context) {
+        TextView txtclose;
+        Button btnFollow;
+        Dialog myDialog = new Dialog(context);;
+        myDialog.setContentView(R.layout.fragment_popup);
+        txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
+        txtclose.setText("M");
+        btnFollow = (Button) myDialog.findViewById(R.id.btnfollow);
+        txtclose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myDialog.dismiss();
+            }
+        });
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
     }
 }
