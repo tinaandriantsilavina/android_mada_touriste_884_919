@@ -254,4 +254,13 @@ public  abstract class Utils {
                 .commit();
             return true;
     }
+
+    public static boolean fragmentNavig(Fragment activity, Fragment fragment){
+        activity.getParentFragmentManager()
+                .beginTransaction()
+                .replace(R.id.main_fragment, fragment)
+                .addToBackStack(null)
+                .commit();
+        return true;
+    }
 }

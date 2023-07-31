@@ -1,10 +1,13 @@
 package com.madatouriste.vue;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.graphics.Color;
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,44 +20,47 @@ import com.madatouriste.utils.Utils;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ProvinceDetailActivity extends AppCompatActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Bundle b = getIntent().getExtras();
-        setContentView(R.layout.activity_province_detail);
-
-//        View includ = findViewById(R.id.fragment_province_detail_includ_image);
-//        if (includ != null) {
-////            TextView textView = includ.findViewById(R.id.fragment_province_detail_txt_nom);
-////            if (textView != null) {
-////                textView.setText("Antananarivo");
-////            }
-//        }
-        initDescription();
-        initLien();
-        initLieu();
-        initMenu();
+public class ProvinceDetailFragment extends Fragment {
+    Province province ;
+    public ProvinceDetailFragment(){
+        // require a empty public constructor
     }
 
-    public void initDescription(){
-        TextView titre = findViewById(R.id.fragment_province_detail_description_Titre);
-        TextView text = findViewById(R.id.fragment_province_detail_description_text);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v =inflater.inflate(R.layout.fragment_province_detail, container, false);
+        if(getArguments()!=null && getArguments().getSerializable("province")!=null){
+            province= (Province) getArguments().getSerializable("province");
+            initDescription(v);
+            initLien(v);
+            initLieu(v);
+            initMenu(v);
+        }else{
+            Toast.makeText(getActivity(), "Veullez selectionner un province ", Toast.LENGTH_SHORT).show();
+        }
+        return v;
+    }
+
+
+
+
+    public void initDescription(View v){
+        TextView titre = v.findViewById(R.id.fragment_province_detail_description_Titre);
+        TextView text = v.findViewById(R.id.fragment_province_detail_description_text);
         titre.setText("ketrika titre");
         text.setText("ketrika  text");
     }
-    public void initLien() {
+    public void initLien(View v) {
         ArrayList<String> list = new ArrayList<>();
         list.add("Lien 1");
         list.add("Lien 2");
         list.add("Lien 3");
 
-        LinearLayout linearLayout = findViewById(R.id.fragment_province_detail_lien_linearLayout);
+        LinearLayout linearLayout = v.findViewById(R.id.fragment_province_detail_lien_linearLayout);
 
         for (int i = 0; i < list.size(); i++) {
             String element = list.get(i);
-            TextView textView = new TextView(this);
+            TextView textView = new TextView(getActivity());
             textView.setText(element);
             textView.setTextSize(14);
             textView.setPadding(40, 20, 20, 20);
@@ -63,24 +69,24 @@ public class ProvinceDetailActivity extends AppCompatActivity {
             textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(ProvinceDetailActivity.this, "Clic sur : " + element, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Clic sur : " + element, Toast.LENGTH_SHORT).show();
                 }
             });
             linearLayout.addView(textView);
         }
     }
 
-    public void initLieu(){
+    public void initLieu(View v){
         ArrayList<String> list = new ArrayList<>();
         list.add("Lieu 1");
         list.add("Lieu 2");
         list.add("Lieu 3");
 
-        LinearLayout linearLayout = findViewById(R.id.fragment_province_detail_lieu_linearLayout);
+        LinearLayout linearLayout = v.findViewById(R.id.fragment_province_detail_lieu_linearLayout);
 
         for (int i = 0; i < list.size(); i++) {
             String element = list.get(i);
-            TextView textView = new TextView(this);
+            TextView textView = new TextView(getActivity());
             textView.setText(element);
             textView.setTextSize(14);
             textView.setPadding(40, 20, 20, 20);
@@ -89,37 +95,37 @@ public class ProvinceDetailActivity extends AppCompatActivity {
             textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(ProvinceDetailActivity.this, "Clic sur : " + element, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Clic sur : " + element, Toast.LENGTH_SHORT).show();
                 }
             });
             linearLayout.addView(textView);
         }
     }
 
-    public void initMenu(){
-        Button btnLieu = findViewById(R.id.fragment_province_detail_menu_btnLieu);
+    public void initMenu(View v){
+        Button btnLieu = v.findViewById(R.id.fragment_province_detail_menu_btnLieu);
         btnLieu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ProvinceDetailActivity.this, "Clic sur : lieu" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Clic sur : lieu" , Toast.LENGTH_SHORT).show();
             }
         });
 
-        Button btnPhoto = findViewById(R.id.fragment_province_detail_menu_btnPhoto);
+        Button btnPhoto = v.findViewById(R.id.fragment_province_detail_menu_btnPhoto);
         btnPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ProvinceDetailActivity.this, "Clic sur : Photo" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Clic sur : Photo" , Toast.LENGTH_SHORT).show();
             }
         });
 
-        Button btnVideo = findViewById(R.id.fragment_province_detail_menu_btnVideo);
+        Button btnVideo = v.findViewById(R.id.fragment_province_detail_menu_btnVideo);
         btnVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 HashMap<String, Province> map = new HashMap<>();
-                Utils.ecouteMenu(ProvinceDetailActivity.this, btnVideo, VideoActivity.class, map);
-                Toast.makeText(ProvinceDetailActivity.this, "Clic sur : btnVideo" , Toast.LENGTH_SHORT).show();
+                Utils.ecouteMenu(getActivity(), btnVideo, VideoActivity.class, map);
+                Toast.makeText(getActivity(), "Clic sur : btnVideo" , Toast.LENGTH_SHORT).show();
             }
         });
     }

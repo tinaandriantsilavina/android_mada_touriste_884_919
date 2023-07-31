@@ -58,7 +58,7 @@ public class ProvinceAdapter extends ArrayAdapter<Province> {
 
         ImageView listImage = view.findViewById(R.id.listImage);
         TextView listName = view.findViewById(R.id.listName);
-        TextView listTime = view.findViewById(R.id.listTime);
+//        TextView listTime = view.findViewById(R.id.listTime);
 
 //         Load the image from the URL using Glide
         Glide.with(getContext())
@@ -66,7 +66,7 @@ public class ProvinceAdapter extends ArrayAdapter<Province> {
                 .into(listImage);
 
         listName.setText(province.getNom());
-        listTime.setText(province.getNom());
+//        listTime.setText(province.getNom());
 
         return view;
     }

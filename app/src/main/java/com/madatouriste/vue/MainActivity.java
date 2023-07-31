@@ -2,31 +2,14 @@ package com.madatouriste.vue;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 
-import android.Manifest;
-import android.app.Notification;
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageButton;
 
-import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.madatouriste.R;
-import com.madatouriste.modele.Province;
-import com.madatouriste.utils.App;
 import com.madatouriste.utils.Utils;
-
-import android.app.NotificationManager;
-import android.widget.TextView;
-
-import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView
         .OnNavigationItemSelectedListener   {
@@ -36,10 +19,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private ImageButton buttonHistorique;
     private ImageButton btnLogin;
 
-    
 
-    FirstFragment firstFragment = new FirstFragment();
-    SecondFragment secondFragment = new SecondFragment();
+
+    ProvinceListFragment provinceListFragment = new ProvinceListFragment();
+    ProvinceDetailFragment secondFragment = new ProvinceDetailFragment();
     ThirdFragment thirdFragment = new ThirdFragment();
 
 
@@ -62,13 +45,13 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         bottomNavigationView
                 .setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.person);
-        Utils.fragmentNavig(this,firstFragment);
+        Utils.fragmentNavig(this, provinceListFragment);
     }
 
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         boolean val = false;
         if(((Integer)item.getItemId()).equals(R.id.person)){
-            val =  Utils.fragmentNavig(this,firstFragment);
+            val =  Utils.fragmentNavig(this, provinceListFragment);
         }else if (((Integer)item.getItemId()).equals(R.id.home)){
             val =  Utils.fragmentNavig(this,secondFragment);
         }else if(((Integer)item.getItemId()).equals(R.id.settings)){
