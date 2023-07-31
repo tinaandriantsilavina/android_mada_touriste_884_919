@@ -1,5 +1,6 @@
 package com.madatouriste.vue;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,8 +8,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.madatouriste.R;
+
+import java.io.Serializable;
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +29,15 @@ public class FirstFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        View v = inflater.inflate(R.layout.fragment_first, container, false);
+        TextView t = v.findViewById(R.id.firstFragment);
+        t.setText("kekeke");
+        t.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText( getActivity() , "Le serveur est hors ligne, veuillez démarrer XAMPP", Toast.LENGTH_SHORT).show();
+            }
+        });
         return inflater.inflate(R.layout.fragment_first, container, false);
     }
 //    // TODO: Rename parameter arguments, choose names that match
@@ -71,4 +86,7 @@ public class FirstFragment extends Fragment {
 //        // Inflate the layout for this fragment
 //        return inflater.inflate(R.layout.fragment_first, container, false);
 //    }
+
+
+
 }

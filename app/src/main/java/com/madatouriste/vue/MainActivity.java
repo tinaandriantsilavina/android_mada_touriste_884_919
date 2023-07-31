@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         .OnNavigationItemSelectedListener   {
 
     private ImageButton buttonIMG;
-
     private ImageButton buttonMenulogin;
     private ImageButton buttonHistorique;
     private ImageButton btnLogin;
@@ -102,13 +101,13 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private void init() {
         Utils.saveText(this, "token.txt", "Token2");
         String token = Utils.loadText(this, "token.txt");
-        this.buttonIMG = (ImageButton) findViewById(R.id.btnMenuIMG);
-        this.buttonHistorique = (ImageButton) findViewById(R.id.btnMenuHistorique);
-        this.buttonMenulogin = (ImageButton) findViewById(R.id.btnMenuLogin);
+//        this.buttonIMG = (ImageButton) findViewById(R.id.btnMenuIMG);
+//        this.buttonHistorique = (ImageButton) findViewById(R.id.btnMenuHistorique);
+//        this.buttonMenulogin = (ImageButton) findViewById(R.id.btnMenuLogin);
 
-        HashMap<String, Province> map = new HashMap<>();
+//        HashMap<String, Province> map = new HashMap<>();
 
-        Utils.ecouteMenu(this, this.buttonMenulogin, ProvinceActivity.class, map);
+//        Utils.ecouteMenu(this, this.buttonMenulogin, ProvinceActivity.class, map);
     }
 }
 
