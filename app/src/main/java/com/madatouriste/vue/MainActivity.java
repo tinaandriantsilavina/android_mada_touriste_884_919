@@ -4,9 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ImageButton;
-
+import androidx.core.splashscreen.SplashScreen;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.madatouriste.R;
 import com.madatouriste.modele.Province;
@@ -16,6 +17,8 @@ import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
+    private boolean keep = true;
+    private final int DELAY = 3000;
     private ImageButton buttonIMG;
 
     private ImageButton buttonMenulogin;
@@ -24,12 +27,28 @@ public class MainActivity extends AppCompatActivity {
 //    private Controle controle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
         super.onCreate(savedInstanceState);
+        splashScreen.setKeepOnScreenCondition(new SplashScreen.KeepOnScreenCondition() {
+            @Override
+            public boolean shouldKeepOnScreen() {
+                return keep;
+            }
+        });
+        Handler handler = new Handler();
+        handler.postDelayed(runner, DELAY);
         setContentView(R.layout.activity_main);
 //        ecouteMenuIMG();
         init();
     }
 
+    /**Will cause a second process to run on the main thread**/
+    private final Runnable runner = new Runnable() {
+        @Override
+        public void run() {
+            keep = false;
+        }
+    };
     private void init()  {
         Utils.saveText(this,"token.txt","Token2");
         String token = Utils.loadText(this, "token.txt");
