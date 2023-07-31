@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private ImageButton buttonHistorique;
     private ImageButton btnLogin;
 
+    
+
     FirstFragment firstFragment = new FirstFragment();
     SecondFragment secondFragment = new SecondFragment();
     ThirdFragment thirdFragment = new ThirdFragment();
@@ -61,10 +63,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 .setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.person);
         Utils.fragmentNavig(this,firstFragment);
-//        getSuppoUtils.fragmentNavig(this,firstFragment);rtFragmentManager()
-//                .beginTransaction()
-//                .replace(R.id.main_fragment, firstFragment)
-//                .commit();
     }
 
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

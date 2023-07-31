@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.madatouriste.R;
+import com.madatouriste.utils.Utils;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -31,10 +32,16 @@ public class FirstFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_first, container, false);
         TextView t = v.findViewById(R.id.firstFragment);
         t.setText("Produit detail");
+        SecondFragment secondFragment = new SecondFragment();
+        Bundle b = new Bundle();
+        b.putSerializable("ketrika", "Value");
+        secondFragment.setArguments(b);
         t.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 Toast.makeText( getActivity() , "Le serveur est hors ligne, veuillez démarrer XAMPP", Toast.LENGTH_SHORT).show();
+                Utils.fragmentNavig(getActivity(), secondFragment);
             }
         });
         return v;

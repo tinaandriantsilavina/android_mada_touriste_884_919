@@ -246,11 +246,12 @@ public  abstract class Utils {
         myDialog.show();
     }
 
-    public static boolean fragmentNavig(FragmentActivity fragmentActivity, Fragment fragment){
-            fragmentActivity.getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.main_fragment, fragment)
-                    .commit();
+    public static boolean fragmentNavig(FragmentActivity activity, Fragment fragment){
+        activity.getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.main_fragment, fragment)
+                .addToBackStack(null)
+                .commit();
             return true;
     }
 }
