@@ -28,17 +28,16 @@ public class FirstFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_first, container, false);
         TextView t = v.findViewById(R.id.firstFragment);
-        t.setText("kekeke");
+        t.setText("Produit detail");
         t.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText( getActivity() , "Le serveur est hors ligne, veuillez démarrer XAMPP", Toast.LENGTH_SHORT).show();
             }
         });
-        return inflater.inflate(R.layout.fragment_first, container, false);
+        return v;
     }
 //    // TODO: Rename parameter arguments, choose names that match
 //    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

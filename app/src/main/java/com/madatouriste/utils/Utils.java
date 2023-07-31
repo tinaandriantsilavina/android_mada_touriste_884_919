@@ -9,13 +9,17 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.madatouriste.R;
@@ -240,5 +244,13 @@ public  abstract class Utils {
         });
         myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         myDialog.show();
+    }
+
+    public static boolean fragmentNavig(FragmentActivity fragmentActivity, Fragment fragment){
+            fragmentActivity.getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.main_fragment, fragment)
+                    .commit();
+            return true;
     }
 }

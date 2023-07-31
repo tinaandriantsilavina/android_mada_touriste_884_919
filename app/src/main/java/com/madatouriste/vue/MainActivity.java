@@ -60,33 +60,21 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         bottomNavigationView
                 .setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.person);
-
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.flFragment, firstFragment)
-                .commit();
+        Utils.fragmentNavig(this,firstFragment);
+//        getSuppoUtils.fragmentNavig(this,firstFragment);rtFragmentManager()
+//                .beginTransaction()
+//                .replace(R.id.main_fragment, firstFragment)
+//                .commit();
     }
 
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         boolean val = false;
         if(((Integer)item.getItemId()).equals(R.id.person)){
-            getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.flFragment, firstFragment)
-                        .commit();
-                val = true;
+            val =  Utils.fragmentNavig(this,firstFragment);
         }else if (((Integer)item.getItemId()).equals(R.id.home)){
-            getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.flFragment, secondFragment)
-                        .commit();
-                val = true;
+            val =  Utils.fragmentNavig(this,secondFragment);
         }else if(((Integer)item.getItemId()).equals(R.id.settings)){
-            getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.flFragment, thirdFragment)
-                        .commit();
-                val = true;
+            val =  Utils.fragmentNavig(this,thirdFragment);
         }
         return val;
     }
