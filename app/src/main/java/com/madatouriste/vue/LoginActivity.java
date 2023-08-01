@@ -11,12 +11,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.madatouriste.R;
 import com.madatouriste.modele.Province;
+import com.madatouriste.modele.User;
 import com.madatouriste.utils.ApiService;
 import com.madatouriste.utils.ProgressBuilder;
 import com.madatouriste.utils.Utils;
@@ -39,15 +41,18 @@ public class LoginActivity extends AppCompatActivity {
 
     Boolean affichePass = false;
     ProgressDialog nDialog;
+    TextView btnInscription;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_login);
         init();
-        String json = "{\"name\":\"John\", \"age\":30}";
-        String jsonA = "[{\"name\":\"John\", \"age\":31},{\"name\":\"John\", \"age\":32},{\"name\":\"John\", \"age\":34}]";
-        try {
+        actionBtnConnexion();
+        actionBtnPassword();
+//        String json = "{\"name\":\"John\", \"age\":30}";
+//        String jsonA = "[{\"name\":\"John\", \"age\":31},{\"name\":\"John\", \"age\":32},{\"name\":\"John\", \"age\":34}]";
+//        try {
 //            ObjectMapper objectMapper = new ObjectMapper();
 //            JSONArray jsonArray = new JSONArray(jsonA);
 //            ArrayList<Person> array = Utils.getArray(jsonA, Person.class);
@@ -57,16 +62,16 @@ public class LoginActivity extends AppCompatActivity {
 //            Person person = objectMapper.readValue(json, Person.class);
 //            System.out.println("Nom : " + person.getName());
 //            System.out.println("Âge : " + person.getAge());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            testPost();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        try {
+////            testPost();
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
     }
-    TextView btnInscription;
+
 
     public void init(){
         user = (EditText) findViewById(R.id.username);
@@ -74,15 +79,10 @@ public class LoginActivity extends AppCompatActivity {
         btnConnexion = (Button) findViewById(R.id.btnConnexion);
         btnInscription = (TextView) findViewById(R.id.btnInscription);
         passwordIcon = (ImageView)  findViewById(R.id.passwordIcon);
-        actionBtnPassword();
         HashMap<String,Province> map = new HashMap<>();
-        map.put("pers1", new Province());
-        map.put("pers2", new Province());
         Utils.ecouteMenu(this,btnInscription, InscriptionActivity.class, map );
 
     }
-
-
 
     public void actionBtnPassword(){
         passwordIcon.setOnClickListener(new View.OnClickListener(){
@@ -91,17 +91,31 @@ public class LoginActivity extends AppCompatActivity {
                 if(affichePass){
                     affichePass = false;
                     pass.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                    passwordIcon.setImageResource(R.drawable.back_btn    );
+                    passwordIcon.setImageResource(R.drawable.baseline_remove_red_eye_24);
                 }else{
                     affichePass = true;
                     pass.setInputType( InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-                    passwordIcon.setImageResource(R.drawable.logout_icon);
+                    passwordIcon.setImageResource(R.drawable.baseline_disabled_visible_24);
                 }
                 pass.setSelection(pass.length());
             }
         });
     }
+    public void actionBtnConnexion(){
+        btnConnexion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String email = String.valueOf(user.getText()).trim();
+                String mdp = String.valueOf(pass.getText()).trim();
+                if(email.isEmpty() || mdp.isEmpty()){
+                    Toast.makeText(LoginActivity.this, "Veuilez bien remplir le formulaire svp ", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(LoginActivity.this, email+"  "+mdp, Toast.LENGTH_SHORT).show();
+                }
 
+            }
+        });
+    }
 //    public void testGET() throws Exception{
 //        ProgressBuilder dialog  = new ProgressBuilder(LoginActivity2.this);
 //        RequestParams params = new RequestParams();

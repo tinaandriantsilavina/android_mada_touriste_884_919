@@ -25,12 +25,6 @@
             android:name=".vue.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".vue.ProvinceDetailActivity"
-            android:exported="false" />
-        <activity
-            android:name=".vue.ProvinceActivity"
-            android:exported="false" />
-        <activity
             android:name=".vue.VideoActivity"
             android:exported="false" />
         <activity

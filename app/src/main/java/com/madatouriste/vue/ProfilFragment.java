@@ -83,9 +83,11 @@ public class ProfilFragment extends Fragment {
                 if(affichePass){
                     affichePass = false;
                     profil_txt_password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    passwordIcon.setImageResource(R.drawable.baseline_remove_red_eye_24);
                 }else{
                     affichePass = true;
                     profil_txt_password.setInputType( InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    passwordIcon.setImageResource(R.drawable.baseline_disabled_visible_24);
                 }
                 profil_txt_password.setSelection(profil_txt_password.length());
             }

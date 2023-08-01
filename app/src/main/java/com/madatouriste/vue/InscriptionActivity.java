@@ -10,15 +10,19 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.madatouriste.R;
+import com.madatouriste.utils.Utils;
+
+import java.util.HashMap;
 
 public class InscriptionActivity extends AppCompatActivity {
 
-    EditText nom;
-    EditText email;
-    EditText mobile;
-    EditText pass;
+    EditText inscription_txt_nom;
+    EditText inscription_txt_prenom;
+    EditText inscription_txt_email;
+    EditText inscription_txt_pass;
     EditText confirm_pass;
 
     ImageView passwordIcon;
@@ -40,46 +44,31 @@ public class InscriptionActivity extends AppCompatActivity {
     }
 
     public void init(){
-        nom = (EditText) findViewById(R.id.nom);
-        email = (EditText) findViewById(R.id.email);
-        mobile = (EditText) findViewById(R.id.mobile);
-        pass = (EditText) findViewById(R.id.pass);
-        confirm_pass = (EditText) findViewById(R.id.confirm_pass);
+        inscription_txt_nom = (EditText) findViewById(R.id.inscription_txt_nom);
+        inscription_txt_prenom = (EditText) findViewById(R.id.inscription_txt_prenom);
+        inscription_txt_email = (EditText) findViewById(R.id.inscription_txt_email);
+        inscription_txt_pass = (EditText) findViewById(R.id.inscription_txt_pass);
         btnInscription = (AppCompatButton) findViewById(R.id.btnInscription);
-        passwordIcon = (ImageView) findViewById(R.id.passwordIcon);
-        confirm_passwordIcon = (ImageView) findViewById(R.id.confirm_passwordIcon);
+        passwordIcon = (ImageView) findViewById(R.id.inscription_passwordIcon);
         btnConnexion = ( TextView )findViewById(R.id.btnConnexion) ;
-        ecouteMenu(btnConnexion, LoginActivity.class);
+        Utils.ecouteMenu(this, btnConnexion, LoginActivity.class, new HashMap());
         actionBtnPassword();
-        actionBtnConfirmPassword();
+        actionBtnInscription();
     }
-
-    private void ecouteMenu(TextView button, Class classe){
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(InscriptionActivity.this,classe);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // fermer tout autre activity
-                startActivity(intent);
-            }
-        });
-    }
-
-
     public void actionBtnPassword(){
         passwordIcon.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 if(affichePass){
                     affichePass = false;
-                    pass.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                    passwordIcon.setImageResource(R.drawable.logout_icon);
+                    inscription_txt_pass.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    passwordIcon.setImageResource(R.drawable.baseline_remove_red_eye_24);
                 }else{
                     affichePass = true;
-                    pass.setInputType( InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-                    passwordIcon.setImageResource(R.drawable.ic_launcher_foreground);
+                    inscription_txt_pass.setInputType( InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    passwordIcon.setImageResource(R.drawable.baseline_disabled_visible_24);
                 }
-                pass.setSelection(pass.length());
+                inscription_txt_pass.setSelection(inscription_txt_pass.length());
             }
         });
     }
@@ -99,6 +88,23 @@ public class InscriptionActivity extends AppCompatActivity {
                     confirm_passwordIcon.setImageResource(R.drawable.logout_icon);
                 }
                 confirm_pass.setSelection(confirm_pass.length());
+            }
+        });
+    }
+
+    public void actionBtnInscription(){
+        btnInscription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String nom = String.valueOf(inscription_txt_nom.getText());
+                String prenom = String.valueOf(inscription_txt_prenom.getText());
+                String email = String.valueOf(inscription_txt_email.getText());
+                String mdp = String.valueOf(inscription_txt_pass.getText());
+                if(nom.isEmpty() || prenom.isEmpty() || email.isEmpty() || mdp.isEmpty()){
+                    Toast.makeText(InscriptionActivity.this, "Veuilez bien remplir le formulaire svp ", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(InscriptionActivity.this, nom+" "+ prenom +" " + email+" "+mdp, Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

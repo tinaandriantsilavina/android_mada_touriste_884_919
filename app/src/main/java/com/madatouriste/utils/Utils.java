@@ -97,19 +97,6 @@ public  abstract class Utils {
         }
         return array;
     }
-
-//    public  static void ecouteMenu(Context context, View button, Class classe, Object ob){
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(context,classe);
-//                intent.putExtra("data", (Serializable) ob);
-//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // fermer tout autre activity
-//                context.startActivity(intent);
-//            }
-//        });
-//    }
-
     public  static void ecouteMenu(Context context, View button, Class classe, HashMap<String, ?>  map){
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,6 +111,33 @@ public  abstract class Utils {
             }
         });
     }
+
+
+    public  static void ecouteMenu(Context context, View button, Class classe, HashMap<String, ?>  map, boolean clearAllActivity){
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context,classe);
+                for (HashMap.Entry<String, ?> entry : map.entrySet()){
+                    intent.putExtra(entry.getKey(), (Serializable) entry.getValue());
+                }
+                if(clearAllActivity){
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                }
+                context.startActivity(intent);
+            }
+        });
+    }
+
+    public  static void redirection(Context context, Class classe, HashMap<String, ?>  map){
+        Intent intent = new Intent(context,classe);
+        for (HashMap.Entry<String, ?> entry : map.entrySet()){
+            intent.putExtra(entry.getKey(), (Serializable) entry.getValue());
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        }
+        context.startActivity(intent);
+    }
+
 
     public static void saveText(Context context,String fileName,String text) {
         FileOutputStream fos = null;

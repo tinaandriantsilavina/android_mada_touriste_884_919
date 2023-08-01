@@ -8,6 +8,12 @@
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".vue.LoginActivity">
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:src="@drawable/logo"
+        />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -51,10 +57,11 @@
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
             android:inputType="textPassword"
+            android:hint="Mot de passe"
             android:maxLines="1"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
-            android:textStyle="bold" />
+             />
 
         <ImageView
             android:id="@+id/passwordIcon"
@@ -63,21 +70,21 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:padding="10dp"
-            android:src="@drawable/logout_icon"
+            android:src="@drawable/baseline_remove_red_eye_24"
             android:adjustViewBounds="true"
             android:layout_marginEnd="20dp"
             />
     </RelativeLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:text="Mot de passe oublié"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:textColor="@color/primary"
-        />
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="end"-->
+<!--        android:text="Mot de passe oublié"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_marginEnd="20dp"-->
+<!--        android:textColor="@color/primary"-->
+<!--        />-->
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnConnexion"
