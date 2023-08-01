@@ -13,7 +13,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.madatouriste.R;
+import com.madatouriste.constant.ProvinceConstant;
 import com.madatouriste.modele.Province;
 import com.madatouriste.utils.Utils;
 
@@ -26,14 +28,17 @@ public class ProvinceDetailFragment extends Fragment {
         // require a empty public constructor
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v =inflater.inflate(R.layout.fragment_province_detail, container, false);
         if(getArguments()!=null && getArguments().getSerializable("province")!=null){
             province= (Province) getArguments().getSerializable("province");
+            initProvince();
+            initEntete(v);
             initDescription(v);
             initLien(v);
-            initLieu(v);
+//            initLieu(v);
             initMenu(v);
         }else{
             Toast.makeText(getActivity(), "Veullez selectionner un province ", Toast.LENGTH_SHORT).show();
@@ -42,19 +47,29 @@ public class ProvinceDetailFragment extends Fragment {
     }
 
 
-
-
+    public void initProvince() {
+        try{
+            ObjectMapper objectMapper = new ObjectMapper();
+            String json2 = ProvinceConstant.propvince;
+            province = objectMapper.readValue(json2, Province.class);
+        }catch (Exception ex){
+            Toast.makeText(getActivity(), "Erreur ", Toast.LENGTH_SHORT).show();
+        }
+    }
+    public void initEntete(View v){
+        LinearLayout layout = v.findViewById(R.id.fragment_province_detail_layout);
+//        layout.setBackground();
+        TextView titre = layout.findViewById(R.id.fragment_province_detail_titre);
+        titre.setText(province.getNom());
+    }
     public void initDescription(View v){
         TextView titre = v.findViewById(R.id.fragment_province_detail_description_Titre);
         TextView text = v.findViewById(R.id.fragment_province_detail_description_text);
-        titre.setText("ketrika titre");
-        text.setText("ketrika  text");
+//        titre.setText("ketrika titre");
+        text.setText(province.getDescription());
     }
     public void initLien(View v) {
-        ArrayList<String> list = new ArrayList<>();
-        list.add("Lien 1");
-        list.add("Lien 2");
-        list.add("Lien 3");
+        ArrayList<String> list = province.getLiens();
 
         LinearLayout linearLayout = v.findViewById(R.id.fragment_province_detail_lien_linearLayout);
 

@@ -4,24 +4,24 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Province implements Serializable {
-    private Integer id;
-    private String nom, description, imageUrl, pdp , pdc;
-    private ArrayList<String> images, videos;
+    private String id;
+    private String nom, description, pdp , pdc;
+    private ArrayList<String> images, videos, liens;
 
     public Province() {
     }
 
-    public Province(String nom, String imageUrl) {
-        this.id = 1;
+    public Province(String nom, String pdp) {
+        this.id = "1";
         this.nom = nom;
-        this.imageUrl = imageUrl;
+        this.pdp = pdp;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -49,14 +49,6 @@ public class Province implements Serializable {
         this.images = images;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
     public String getPdp() {
         return pdp;
     }
@@ -75,6 +67,14 @@ public class Province implements Serializable {
 
     public ArrayList<String> getVideos() {
         return videos;
+    }
+
+    public ArrayList<String> getLiens() {
+        return liens;
+    }
+
+    public void setLiens(ArrayList<String> liens) {
+        this.liens = liens;
     }
 
     public void setVideos(ArrayList<String> videos) {

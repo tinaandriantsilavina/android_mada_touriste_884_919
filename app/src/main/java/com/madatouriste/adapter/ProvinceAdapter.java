@@ -62,7 +62,7 @@ public class ProvinceAdapter extends ArrayAdapter<Province> {
 
 //         Load the image from the URL using Glide
         Glide.with(getContext())
-                .load(province.getImageUrl())
+                .load(province.getPdp())
                 .into(listImage);
 
         listName.setText(province.getNom());
