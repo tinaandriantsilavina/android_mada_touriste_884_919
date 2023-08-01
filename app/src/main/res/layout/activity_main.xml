@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/transparent"
     tools:context=".vue.MainActivity"
 
     >
@@ -112,10 +113,12 @@
    <com.google.android.material.bottomnavigation.BottomNavigationView
        android:id="@+id/bottomNavigationView"
        style="@style/BottomNavigation"
-       android:layout_width="408dp"
-       android:layout_height="47dp"
-       android:layout_marginBottom="16dp"
+       android:layout_width="match_parent"
+       android:layout_height="45dp"
+       android:layout_marginBottom="-10dp"
        app:layout_constraintBottom_toBottomOf="parent"
+       android:layout_marginStart="20dp"
+       android:layout_marginEnd="20dp"
        app:layout_constraintEnd_toEndOf="parent"
        app:layout_constraintHorizontal_bias="1.0"
        app:layout_constraintStart_toStartOf="parent"
