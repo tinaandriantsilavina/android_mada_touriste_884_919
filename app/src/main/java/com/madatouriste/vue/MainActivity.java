@@ -18,7 +18,7 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity {
 
     private boolean keep = true;
-    private final int DELAY = 3000;
+    private final int DELAY = 5000;
     private ImageButton buttonIMG;
 
     private ImageButton buttonMenulogin;
