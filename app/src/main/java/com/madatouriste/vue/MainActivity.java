@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     private User user;
     ProvinceListFragment provinceListFragment = new ProvinceListFragment();
-    ProvinceDetailFragment secondFragment = new ProvinceDetailFragment();
+    RechercheFragment rechercheFragment = new RechercheFragment();
     ProfilFragment profilFragment = new ProfilFragment();
 
 
@@ -51,8 +51,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         boolean val = false;
         if(((Integer)item.getItemId()).equals(R.id.province)){
             val =  Utils.fragmentNavig(this, provinceListFragment);
-        }else if (((Integer)item.getItemId()).equals(R.id.home)){
-            val =  Utils.fragmentNavig(this,secondFragment);
+        }else if (((Integer)item.getItemId()).equals(R.id.recherche)){
+            val =  Utils.fragmentNavig(this,rechercheFragment);
         }else if(((Integer)item.getItemId()).equals(R.id.profil)){
             val =  Utils.fragmentNavig(this, profilFragment);
         }
