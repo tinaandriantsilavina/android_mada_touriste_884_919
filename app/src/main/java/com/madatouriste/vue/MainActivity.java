@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.madatouriste.R;
+import com.madatouriste.modele.User;
 import com.madatouriste.utils.Utils;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView
@@ -20,10 +21,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private ImageButton btnLogin;
 
 
-
+    private User user;
     ProvinceListFragment provinceListFragment = new ProvinceListFragment();
     ProvinceDetailFragment secondFragment = new ProvinceDetailFragment();
-    ThirdFragment thirdFragment = new ThirdFragment();
+    ProfilFragment profilFragment = new ProfilFragment();
 
 
     BottomNavigationView bottomNavigationView;
@@ -33,9 +34,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        initBottomMenu();
-        init();
+        initSession();
     }
 
     private void initBottomMenu() {
@@ -44,18 +43,18 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         bottomNavigationView
                 .setOnNavigationItemSelectedListener(this);
-        bottomNavigationView.setSelectedItemId(R.id.person);
+        bottomNavigationView.setSelectedItemId(R.id.province);
         Utils.fragmentNavig(this, provinceListFragment);
     }
 
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         boolean val = false;
-        if(((Integer)item.getItemId()).equals(R.id.person)){
+        if(((Integer)item.getItemId()).equals(R.id.province)){
             val =  Utils.fragmentNavig(this, provinceListFragment);
         }else if (((Integer)item.getItemId()).equals(R.id.home)){
             val =  Utils.fragmentNavig(this,secondFragment);
-        }else if(((Integer)item.getItemId()).equals(R.id.settings)){
-            val =  Utils.fragmentNavig(this,thirdFragment);
+        }else if(((Integer)item.getItemId()).equals(R.id.profil)){
+            val =  Utils.fragmentNavig(this, profilFragment);
         }
         return val;
     }
@@ -67,16 +66,25 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     }
 
 
-    private void init() {
-        Utils.saveText(this, "token.txt", "Token2");
-        String token = Utils.loadText(this, "token.txt");
+//    private void init() {
 //        this.buttonIMG = (ImageButton) findViewById(R.id.btnMenuIMG);
 //        this.buttonHistorique = (ImageButton) findViewById(R.id.btnMenuHistorique);
 //        this.buttonMenulogin = (ImageButton) findViewById(R.id.btnMenuLogin);
-
+//
 //        HashMap<String, Province> map = new HashMap<>();
-
+//
 //        Utils.ecouteMenu(this, this.buttonMenulogin, ProvinceActivity.class, map);
+//    }
+
+    public void initSession(){
+//        Utils.saveText(this, "token.txt", "Token2");
+        String token = Utils.loadText(this, "token.txt");
+        initBottomMenu();
+        user = new User(1,"Andry", "Cedric","email","pass");
+    }
+
+    public User getUser() {
+        return user;
     }
 }
 

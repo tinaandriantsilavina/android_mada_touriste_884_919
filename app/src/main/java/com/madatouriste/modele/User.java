@@ -45,4 +45,24 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public User(Integer id, String nom, String prenom, String email, String password) {
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.password = password;
+    }
+
+    public User(String nom, String prenom) {
+        this.nom = nom;
+        this.prenom = prenom;
+    }
+
+    public User() {
+
+    }
+
+
+
 }

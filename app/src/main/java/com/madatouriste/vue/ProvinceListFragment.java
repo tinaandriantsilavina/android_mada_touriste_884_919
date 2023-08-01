@@ -18,7 +18,7 @@ import com.madatouriste.utils.Utils;
 import java.util.ArrayList;
 public class ProvinceListFragment extends Fragment {
     FragmentProvinceListBinding binding;
-
+    ArrayList<Province> provinceList;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentProvinceListBinding.inflate(inflater, container, false);
@@ -30,15 +30,13 @@ public class ProvinceListFragment extends Fragment {
         ArrayList<String> imageUrls = Utils.getImage();
 
         String[] nameList = {"Pasta", "Maggi", "Cake", "Pancake", "Pizza", "Burgers", "Fries"};
-        String[] timeList = {"30 mins", "2 mins", "45 mins", "10 mins", "60 mins", "45 mins", "30 mins"};
-
-        ArrayList<Province> dataArrayList = new ArrayList<>();
+        provinceList = new ArrayList<>();
         for (int i = 0; i < imageUrls.size(); i++) {
             Province province = new Province(nameList[i], imageUrls.get(i));
-            dataArrayList.add(province);
+            provinceList.add(province);
         }
 
-        ProvinceAdapter listAdapter = new ProvinceAdapter(getActivity(), dataArrayList);
+        ProvinceAdapter listAdapter = new ProvinceAdapter(getActivity(), provinceList);
         binding.listview.setAdapter(listAdapter);
         binding.listview.setClickable(true);
 
@@ -47,7 +45,7 @@ public class ProvinceListFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 ProvinceDetailFragment detail = new ProvinceDetailFragment();
                 Bundle b = new Bundle();
-                b.putSerializable("province", dataArrayList.get(i) );
+                b.putSerializable("province", provinceList.get(i) );
                 detail.setArguments(b);
                 Utils.fragmentNavig(getActivity(),detail);
             }
