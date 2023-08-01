@@ -7,9 +7,9 @@
     android:layout_centerInParent="true"
     android:gravity="center">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="150dp">
+<!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="150dp">-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -46,7 +46,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:weightSum="3">
+                android:weightSum="0">
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/fragment_province_detail_menu_btnLieu"
@@ -60,10 +60,10 @@
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:background="#79D6D1D1" />
+<!--                <View-->
+<!--                    android:layout_width="1dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:background="#79D6D1D1" />-->
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/fragment_province_detail_menu_btnPhoto"
@@ -77,10 +77,10 @@
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:background="#79D6D1D1" />
+<!--                <View-->
+<!--                    android:layout_width="1dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:background="#79D6D1D1" />-->
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/fragment_province_detail_menu_btnVideo"
@@ -202,7 +202,7 @@
         <!--        </androidx.cardview.widget.CardView>-->
 
 
-    </RelativeLayout>
+<!--    </RelativeLayout>-->
     <!--    <com.google.android.material.imageview.ShapeableImageView-->
 <!--        android:src="@drawable/slider"-->
 <!--        app:shapeAppearanceOverlay="@style/Circular"-->
