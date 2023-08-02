@@ -1,10 +1,14 @@
 package com.madatouriste.vue;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.MediaController;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -12,28 +16,36 @@ import android.widget.VideoView;
 import com.madatouriste.R;
 import com.madatouriste.utils.ProgressBuilder;
 
-public class VideoActivity extends AppCompatActivity {
+public class VideoFragment extends Fragment {
     VideoView simpleVideoView;
     MediaController mediaControls;
-
+    View view ;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_video);
-        Bundle b = getIntent().getExtras();
-        String videoPath = "http://192.168.56.1/1.mp4";
-        startVideo(videoPath);
+
     }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        View v =inflater.inflate(R.layout.fragment_video, container, false);
+        view=v;
+        String videoPath = "http://192.168.56.1:3900/api/public/videos/antananarivo_001.mp4";
+        startVideo(videoPath);
+        // Inflate the layout for this fragment
+        return v;
+    }
 
     private void startVideo(String videoPath){
-        simpleVideoView = (VideoView) findViewById(R.id.simpleVideoView);
-        ProgressBuilder dialog  = new ProgressBuilder(this);
+        simpleVideoView = (VideoView) view.findViewById(R.id.simpleVideoView);
+        ProgressBuilder dialog  = new ProgressBuilder(getActivity());
         dialog.showProgressDialog();
         if (isServerOnline(videoPath)) {
             if (mediaControls == null) {
                 // create an object of media controller class
-                mediaControls = new MediaController(VideoActivity.this);
+                mediaControls = new MediaController(view.getContext());
                 mediaControls.setAnchorView(simpleVideoView);
             }
             // set the media controller for video view
@@ -42,7 +54,7 @@ public class VideoActivity extends AppCompatActivity {
 
             simpleVideoView.setVideoURI(Uri.parse(videoPath));
             simpleVideoView.setOnErrorListener((mp,what,extra)->{
-                Toast.makeText(VideoActivity.this,"Erreur lors de la chargement de la video ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),"Erreur lors de la chargement de la video ", Toast.LENGTH_SHORT).show();
                 dialog.dismissProgressDialog();
                 return true;
             });
@@ -53,11 +65,11 @@ public class VideoActivity extends AppCompatActivity {
             simpleVideoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mp) {
-                    Toast.makeText(getApplicationContext(), "Thank You...!!!", Toast.LENGTH_LONG).show(); // display a toast when an video is completed
+                    Toast.makeText(getActivity(), "Thank You...!!!", Toast.LENGTH_LONG).show(); // display a toast when an video is completed
                 }
             });
         } else {
-            Toast.makeText(this, "Le serveur est hors ligne, veuillez démarrer XAMPP", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Le serveur est hors ligne, veuillez démarrer XAMPP", Toast.LENGTH_SHORT).show();
             dialog.dismissProgressDialog();
         }
 

@@ -139,7 +139,9 @@ public class ProvinceDetailFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 HashMap<String, Province> map = new HashMap<>();
-                Utils.ecouteMenu(getActivity(), btnVideo, VideoActivity.class, map);
+//                Utils.ecouteMenu(getActivity(), btnVideo, VideoActivity.class, map);
+                VideoFragment video = new VideoFragment();
+                Utils.fragmentNavig(getActivity(), video);
                 Toast.makeText(getActivity(), "Clic sur : btnVideo" , Toast.LENGTH_SHORT).show();
             }
         });

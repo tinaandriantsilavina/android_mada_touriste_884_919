@@ -7,7 +7,7 @@
     android:layout_centerVertical="false"
     android:background="#000000"
     android:gravity="center"
-    tools:context=".vue.VideoActivity">
+    tools:context=".vue.MainActivity">
 
     <VideoView
         android:id="@+id/simpleVideoView"
