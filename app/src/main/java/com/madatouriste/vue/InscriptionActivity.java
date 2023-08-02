@@ -6,16 +6,27 @@ import androidx.appcompat.widget.AppCompatButton;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.madatouriste.R;
+import com.madatouriste.modele.CustomResponse;
+import com.madatouriste.modele.Token;
+import com.madatouriste.service.RetrofitClient;
+import com.madatouriste.utils.ApiInterface.UserInterface;
 import com.madatouriste.utils.Utils;
+import com.madatouriste.utils.template_json.RegisterJson;
 
 import java.util.HashMap;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class InscriptionActivity extends AppCompatActivity {
 
@@ -108,7 +119,12 @@ public class InscriptionActivity extends AppCompatActivity {
                 if(nom.isEmpty() || prenom.isEmpty() || email.isEmpty() || mdp.isEmpty()){
                     Toast.makeText(InscriptionActivity.this, "Veuilez bien remplir le formulaire svp ", Toast.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(InscriptionActivity.this, nom+" "+ prenom +" " + email+" "+mdp, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(InscriptionActivity.this, nom+" "+ prenom +" " + email+" "+mdp, Toast.LENGTH_SHORT).show();
+                    try {
+                        register(nom,prenom,email,mdp);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
         });
@@ -123,4 +139,40 @@ public class InscriptionActivity extends AppCompatActivity {
         }
     }
 
+
+
+    public void register(String nom,String prenom, String email, String mdp) throws Exception{
+        UserInterface userInterface = RetrofitClient.getRetrofitInstance().create(UserInterface.class);
+
+        RegisterJson input = new RegisterJson();
+        input.setNom(nom);
+        input.setPrenom(prenom);
+        input.setEmail(email);
+        input.setPassword(mdp);
+
+        Call<CustomResponse> call = userInterface.register(input);
+        call.enqueue(new Callback<CustomResponse>() {
+                         @Override
+                         public void onResponse(Call<CustomResponse> call, Response<CustomResponse> response) {
+                             if (response.body().getStatus() == 200) {
+                                 String jsonString = new Gson().toJson(response.body().getDatas());
+                                 Token token = new Gson().fromJson(jsonString, Token.class);
+                                 Log.e("code", "onResponse: " + response.code() );
+                                 Log.e("status", "onResponse: " + response.body().getStatus());
+                                 Log.e("message", "onResponse: message: " + response.body().getMessage() );
+                                 Log.e("raw_datas", "onResponse: message: " + response.body().getDatas() );
+                                 Log.e("object_data", "onResponse: message: " + token );
+                             } else {
+                                 Log.e("code", "onResponse: " + response.code());
+                                 Log.e("status", "onResponse: " + response.body().getStatus());
+                                 Log.e("message", "onResponse: message: " + response.body().getMessage());
+                             }
+                         }
+                         @Override
+                         public void onFailure(Call<CustomResponse> call, Throwable t) {
+                             Log.e("error_message", "onFailure: " + t.getMessage());
+                         }
+                     }
+        );
+    }
 }

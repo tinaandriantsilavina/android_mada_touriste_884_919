@@ -55,11 +55,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 //            LieuService.getAll();
 //            LieuService.getByIdprovince();
 //            UserService.getInfos();
-//            UserService.register();
+            UserService.register();
 //            UserService.updateInfos();
 //            UserService.updatePassword();
 //            getUserInfo();
-            getInfos();
+            getUserInfo();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -86,9 +86,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         }else if(((Integer)item.getItemId()).equals(R.id.logout)){
             Toast.makeText(this, "Deconnexion", Toast.LENGTH_SHORT).show();
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.remove("token");
+            editor.clear();
             editor.apply();
-            onCreate(null);
         }
         return val;
     }
@@ -111,46 +110,50 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         isConnected = connected;
     }
 
-    public void getInfos() throws Exception{
-        ProgressBuilder dialog  = new ProgressBuilder(this);
-        dialog.showProgressDialog();
-        String token =  sharedPreferences.getString("token", null);//"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGMzZjcxODU2ZDVjMzY2MTQ0YzI1MDMiLCJub20iOiJyYWtvdG8iLCJwcmVub20iOiJqZWFuIiwiZW1haWwiOiJyYWtvdG9AbWFkYXRvdXIuY29tIiwiaWF0IjoxNjkwOTk4MjAyLCJleHAiOjE2OTE2MDMwMDJ9.pGywT_TvlVZHm1aT9yqHkYC6U5GWPAmKfC5vGhFpVHM";
-        UserInterface userInterface = RetrofitClient.getRetrofitInstance(token).create(UserInterface.class);
 
-        Call<CustomResponse> call = userInterface.getInfos();
-        call.enqueue(new Callback<CustomResponse>() {
-                         @Override
-                         public void onResponse(Call<CustomResponse> call, Response<CustomResponse> response) {
-                             if (response.body().getStatus() == 200) {
-                                 String jsonString = new Gson().toJson(response.body().getDatas());
-                                 User user = new Gson().fromJson(jsonString, User.class);
-                                 Log.e("code", "onResponse: " + response.code() );
-                                 Log.e("status", "onResponse: " + response.body().getStatus());
-                                 Log.e("message", "onResponse: message: " + response.body().getMessage() );
-                                 Log.e("raw_datas", "onResponse: message: " + response.body().getDatas() );
-                                 Log.e("object_data", "onResponse: message: " + user );
-                                 initBottomMenu();
-                             } else {
-                                 Log.e("code", "onResponse: " + response.code());
-                                 Log.e("status", "onResponse: " + response.body().getStatus());
-                                 Log.e("message", "onResponse: message: " + response.body().getMessage());
-                                 HashMap map = new HashMap();
-                                 map.put("isConnected", false);
-                                 Toast.makeText(MainActivity.this, "Erreur=> "+response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                                 Utils.redirection(MainActivity.this, LoginActivity.class, map);
-                             }
-                             dialog.dismissProgressDialog();
-                         }
-
-                         @Override
-                         public void onFailure(Call<CustomResponse> call, Throwable t) {
-                             t.printStackTrace();
-                             Log.e("error_message", "onFailure: " + t.getMessage());
-                             dialog.dismissProgressDialog();
-                         }
-                     }
-
-        );
+    public  void getUserInfo() throws Exception{
+        HashMap map = new HashMap();
+        map.put("isConnected", false);
+        Utils.redirection(MainActivity.this, LoginActivity.class, map);
+//        ProgressBuilder dialog  = new ProgressBuilder(this);
+//        SharedPreferences sharedPreferences  = getSharedPreferences("auth", MODE_PRIVATE);
+//        String token = sharedPreferences.getString("token", null);
+//        UserInterface userInterface = RetrofitClient.getRetrofitInstance(token).create(UserInterface.class);
+////
+//        Call<CustomResponse> call = userInterface.getInfos();
+//        dialog.showProgressDialog();
+//        call.enqueue(new Callback<CustomResponse>() {
+//                         @Override
+//                         public void onResponse(Call<CustomResponse> call, Response<CustomResponse> response) {
+//                             if (response.body().getStatus() == 200) {
+//                                 String jsonString = new Gson().toJson(response.body().getDatas());
+//                                 User u = new Gson().fromJson(jsonString, User.class);
+//                                 user = u;
+//                                 Log.e("code", "onResponse: " + response.code() );
+//                                 Log.e("status", "onResponse: " + response.body().getStatus());
+//                                 Log.e("message", "onResponse: message: " + response.body().getMessage() );
+//                                 Log.e("raw_datas", "onResponse: message: " + response.body().getDatas() );
+//                                 Log.e("object_data", "onResponse: message: " + user );
+//                                 initBottomMenu();
+//
+//                             } else {
+//                                 Log.e("code", "onResponse: " + response.code());
+//                                 Log.e("status", "onResponse: " + response.body().getStatus());
+//                                 Log.e("message", "onResponse: message: " + response.body().getMessage());
+//                                 HashMap map = new HashMap();
+//                                 map.put("isConnected", false);
+//                                 Utils.redirection(MainActivity.this, LoginActivity.class, map);
+//                             }
+//                             dialog.dismissProgressDialog();
+//                         }
+//                         @Override
+//                         public void onFailure(Call<CustomResponse> call, Throwable t) {
+//                             Log.e("error_message", "onFailure: " + t.getMessage());
+//                             dialog.dismissProgressDialog();
+//                         }
+//                     }
+//
+//        );
     }
 }
 
