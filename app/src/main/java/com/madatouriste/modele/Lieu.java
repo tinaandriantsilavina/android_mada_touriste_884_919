@@ -1,39 +1,30 @@
 package com.madatouriste.modele;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
+import java.util.List;
 
 public class Lieu {
-    private Integer id , idProvince;
-    private String nom , description;
-    private ArrayList<String> liens,  images ;
+    String _id;
+    String idprovince;
+    String nom;
+    String description;
+    String pdp;
+    String pdc;
+    List<String> images;
 
-    public Lieu(){
-
-    }
-    public Lieu(Integer id, Integer idP , String nom, String description, ArrayList<String> l, ArrayList<String> i){
-        this.id =id;
-        this.idProvince = idP;
-        this.nom = nom ;
-        this.description = description;
-        this.liens = l;
-        this.images =i;
+    public String get_id() {
+        return _id;
     }
 
-    public Integer getId() {
-        return id;
+    public void set_id(String _id) {
+        this._id = _id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public String getIdprovince() {
+        return idprovince;
     }
 
-    public Integer getIdProvince() {
-        return idProvince;
-    }
-
-    public void setIdProvince(Integer idProvince) {
-        this.idProvince = idProvince;
+    public void setIdprovince(String idprovince) {
+        this.idprovince = idprovince;
     }
 
     public String getNom() {
@@ -52,19 +43,40 @@ public class Lieu {
         this.description = description;
     }
 
-    public ArrayList<String> getLiens() {
-        return liens;
+    public String getPdp() {
+        return pdp;
     }
 
-    public void setLiens(ArrayList<String> liens) {
-        this.liens = liens;
+    public void setPdp(String pdp) {
+        this.pdp = pdp;
     }
 
-    public ArrayList<String> getImages() {
+    public String getPdc() {
+        return pdc;
+    }
+
+    public void setPdc(String pdc) {
+        this.pdc = pdc;
+    }
+
+    public List<String> getImages() {
         return images;
     }
 
-    public void setImages(ArrayList<String> images) {
+    public void setImages(List<String> images) {
         this.images = images;
+    }
+
+    @Override
+    public String toString() {
+        return "Lieu{" +
+                "_id='" + _id + '\'' +
+                ", idprovince='" + idprovince + '\'' +
+                ", nom='" + nom + '\'' +
+                ", description='" + description + '\'' +
+                ", pdp='" + pdp + '\'' +
+                ", pdc='" + pdc + '\'' +
+                ", images=" + images +
+                '}';
     }
 }

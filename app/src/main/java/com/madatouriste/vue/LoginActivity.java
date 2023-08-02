@@ -3,7 +3,6 @@ package com.madatouriste.vue;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
@@ -17,8 +16,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.madatouriste.R;
-import com.madatouriste.modele.Province;
-import com.madatouriste.modele.User;
 import com.madatouriste.utils.ApiService;
 import com.madatouriste.utils.ProgressBuilder;
 import com.madatouriste.utils.Utils;
@@ -27,7 +24,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.HashMap;
-import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 

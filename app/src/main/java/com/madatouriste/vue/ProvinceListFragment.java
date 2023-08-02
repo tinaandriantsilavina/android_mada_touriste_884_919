@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
-import com.madatouriste.R;
 import com.madatouriste.adapter.ProvinceAdapter;
 import com.madatouriste.databinding.FragmentProvinceListBinding;
 import com.madatouriste.modele.Province;

@@ -1,17 +1,24 @@
 package com.madatouriste.modele;
 
 public class User {
-    private Integer id;
-    private String nom, prenom, email ,password;
+    String _id;
+    String nom;
+    String prenom;
+    String email;
 
-
-
-    public Integer getId() {
-        return id;
+    public User(String nom, String prenom, String email, String password) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
     }
 
     public String getNom() {
@@ -38,31 +45,14 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "_id='" + _id + '\'' +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public User(Integer id, String nom, String prenom, String email, String password) {
-        this.id = id;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.email = email;
-        this.password = password;
-    }
-
-    public User(String nom, String prenom) {
-        this.nom = nom;
-        this.prenom = prenom;
-    }
-
-    public User() {
-
-    }
-
-
-
 }

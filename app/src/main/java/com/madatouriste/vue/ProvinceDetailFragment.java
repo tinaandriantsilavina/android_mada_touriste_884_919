@@ -21,6 +21,7 @@ import com.madatouriste.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class ProvinceDetailFragment extends Fragment {
     Province province ;
@@ -51,7 +52,7 @@ public class ProvinceDetailFragment extends Fragment {
         try{
             ObjectMapper objectMapper = new ObjectMapper();
             String json2 = ProvinceConstant.propvince;
-            province = objectMapper.readValue(json2, Province.class);
+//            province = objectMapper.readValue(json2, Province.class);
         }catch (Exception ex){
             Toast.makeText(getActivity(), "Erreur ", Toast.LENGTH_SHORT).show();
         }
@@ -69,7 +70,7 @@ public class ProvinceDetailFragment extends Fragment {
         text.setText(province.getDescription());
     }
     public void initLien(View v) {
-        ArrayList<String> list = province.getLiens();
+        List<String> list = province.getLiens();
 
         LinearLayout linearLayout = v.findViewById(R.id.fragment_province_detail_lien_linearLayout);
 

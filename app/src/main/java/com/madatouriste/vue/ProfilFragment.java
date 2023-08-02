@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
 import android.text.InputType;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,7 +73,7 @@ public class ProfilFragment extends Fragment {
         ((EditText)v.findViewById(R.id.profil_txt_nom)).setText(user.getNom());
         ((EditText)v.findViewById(R.id.profil_txt_prenom)).setText(user.getPrenom());
         ((EditText)v.findViewById(R.id.profil_txt_email)).setText(user.getEmail());
-        ((EditText)v.findViewById(R.id.profil_txt_password)).setText(user.getPassword());
+//        ((EditText)v.findViewById(R.id.profil_txt_password)).setText(user.getPassword());
     }
     public void actionBtnPassword(View v){
         passwordIcon.setOnClickListener(new View.OnClickListener(){
@@ -102,7 +101,7 @@ public class ProfilFragment extends Fragment {
                 String prenom = String.valueOf(profil_txt_prenom.getText());
                 String email = String.valueOf(profil_txt_email.getText());
                 String password = String.valueOf(profil_txt_password.getText());
-                User user = new User (1, nom, prenom, email, password);
+                User user = new User ( nom, prenom, email, password);
                 String nomUser = user.getNom();
             }
         });

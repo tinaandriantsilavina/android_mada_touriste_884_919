@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -71,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         }else{
             String token = Utils.loadText(this, "token.txt");
             initBottomMenu();
-            user = new User(1,"Andry", "Cedric","email","pass");
+            user = new User("Andry", "Cedric","email","pass");
         }
 
     }

@@ -8,11 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.madatouriste.R;
-import com.madatouriste.modele.User;
 
 public class RechercheFragment extends Fragment {
 
