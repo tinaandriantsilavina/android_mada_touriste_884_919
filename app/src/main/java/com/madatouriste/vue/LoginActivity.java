@@ -3,8 +3,10 @@ package com.madatouriste.vue;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,12 +15,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.madatouriste.R;
+import com.madatouriste.modele.CustomResponse;
+import com.madatouriste.modele.Token;
+import com.madatouriste.service.RetrofitClient;
+import com.madatouriste.utils.ApiInterface.AuthInterface;
 import com.madatouriste.utils.ApiService;
 import com.madatouriste.utils.ProgressBuilder;
 import com.madatouriste.utils.Utils;
+import com.madatouriste.utils.template_json.LoginJson;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -26,6 +34,9 @@ import org.json.JSONObject;
 import java.util.HashMap;
 
 import cz.msebera.android.httpclient.Header;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -46,26 +57,6 @@ public class LoginActivity extends AppCompatActivity {
         init();
         actionBtnConnexion();
         actionBtnPassword();
-//        String json = "{\"name\":\"John\", \"age\":30}";
-//        String jsonA = "[{\"name\":\"John\", \"age\":31},{\"name\":\"John\", \"age\":32},{\"name\":\"John\", \"age\":34}]";
-//        try {
-//            ObjectMapper objectMapper = new ObjectMapper();
-//            JSONArray jsonArray = new JSONArray(jsonA);
-//            ArrayList<Person> array = Utils.getArray(jsonA, Person.class);
-////            for(int i=0; i<jsonArray.length(); i++){
-////                array.add(objectMapper.readValue(jsonArray.get(i).toString(), Person.class));
-////            }
-//            Person person = objectMapper.readValue(json, Person.class);
-//            System.out.println("Nom : " + person.getName());
-//            System.out.println("Âge : " + person.getAge());
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        try {
-////            testPost();
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
     }
 
 
@@ -107,73 +98,15 @@ public class LoginActivity extends AppCompatActivity {
                 if(email.isEmpty() || mdp.isEmpty()){
                     Toast.makeText(LoginActivity.this, "Veuilez bien remplir le formulaire svp ", Toast.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(LoginActivity.this, email+"  "+mdp, Toast.LENGTH_SHORT).show();
+                    try {
+                        login(email,mdp);
+//                        Toast.makeText(LoginActivity.this, email+"  "+mdp, Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        Toast.makeText(LoginActivity.this, "Erreur de connexion", Toast.LENGTH_SHORT).show();
+                    }
                 }
 
             }
-        });
-    }
-//    public void testGET() throws Exception{
-//        ProgressBuilder dialog  = new ProgressBuilder(LoginActivity2.this);
-//        RequestParams params = new RequestParams();
-//        AsyncHttpClient client = new AsyncHttpClient();
-//        client.get("http://192.168.56.1:3900/api/auth/ketrika", new AsyncHttpResponseHandler() {
-//            @Override
-//            public void onStart() {
-//                dialog.showProgressDialog();
-//            }
-//            @Override
-//            public void onSuccess(int i, Header[] headers, byte[] responseBody) {
-//                try {
-//                    JSONObject json= new JSONObject( new String(responseBody));
-//                    int httpStatusCode = i;
-//                } catch (JSONException e) {
-//                    throw new RuntimeException(e);
-//                }
-//
-//                dialog.dismissProgressDialog();
-//            }
-//            @Override
-//            public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-//                JSONArray json = new JSONArray();
-//                dialog.dismissProgressDialog();
-//            }
-//            @Override
-//            public void onRetry(int retryNo) {
-//                // called when request is retried
-//                JSONArray json = new JSONArray();
-//            }
-//        });
-//    }
-
-
-    public void testPost() throws Exception{
-        ProgressBuilder dialog  = new ProgressBuilder(this);
-        JSONObject json = new JSONObject().put("email", "a@a.com").put("password", "12345");
-        RequestParams params = new RequestParams();
-        ApiService.post("api/auth", params,json, new AsyncHttpResponseHandler() {
-            @Override
-            public void onStart() {dialog.showProgressDialog();}
-            @Override
-            public void onSuccess(int i, Header[] headers, byte[] responseBody) {
-                try {
-                    JSONObject json = new JSONObject(new String(responseBody));
-                    ObjectMapper objectMapper = new ObjectMapper();
-                    String json2 = "{\"name\":\"John Doe\",\"age\":30}";
-//                    Person pers = objectMapper.readValue(json2, Person.class);
-                    dialog.dismissProgressDialog();
-
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-            }
-            @Override
-            public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                JSONArray json = new JSONArray();
-                dialog.dismissProgressDialog();
-            }
-            @Override
-            public void onRetry(int retryNo) {}
         });
     }
 
@@ -192,5 +125,50 @@ public class LoginActivity extends AppCompatActivity {
 
     public void setConnected(boolean connected) {
         isConnected = connected;
+    }
+
+
+
+    public void login(String email, String mdp) throws Exception{
+        ProgressBuilder spinner = new ProgressBuilder(this);
+        AuthInterface authInterface = RetrofitClient.getRetrofitInstance().create(AuthInterface.class);
+        LoginJson input = new LoginJson();
+        input.setEmail(email);
+        input.setPassword(mdp);
+        spinner.showProgressDialog();
+        Call<CustomResponse> call = authInterface.login(input);
+        call.enqueue(new Callback<CustomResponse>() {
+                         @Override
+                         public void onResponse(Call<CustomResponse> call, Response<CustomResponse> response) {
+                             Token token = new Gson().fromJson(response.body().getDatas().toString(), Token.class);
+                             if(token.getToken()!=null){
+//                                 Utils.saveText(LoginActivity.this,"token.txt",token.getToken());
+                                 SharedPreferences sharedPreferences = getSharedPreferences("auth", MODE_PRIVATE);
+                                 SharedPreferences.Editor editor = sharedPreferences.edit();
+                                 editor.putString("token", token.getToken());
+                                 editor.apply();
+
+                                 HashMap map = new HashMap();
+                                 map .put("token", token.getToken());
+                                 Utils.redirection(LoginActivity.this,MainActivity.class, map);
+                             }else{
+                                 Toast.makeText(LoginActivity.this, "Email et/ou Mot de passe  incorrecte ", Toast.LENGTH_SHORT).show();
+                             }
+//                             Log.e("code", "onResponse: " + response.code() );
+//                             Log.e("message", "onResponse: message: " + response.body().getMessage() );
+//                             Log.e("raw_datas", "onResponse: message: " + response.body().getDatas() );
+//                             Log.e("token_object", "onResponse: message: " + token.getToken() );
+                            spinner.dismissProgressDialog();
+                         }
+
+                         @Override
+                         public void onFailure(Call<CustomResponse> call, Throwable t) {
+                             Log.e("error_message", "onFailure: " + t.getMessage());
+                             Toast.makeText(LoginActivity.this, "Erreur de connexion WS", Toast.LENGTH_SHORT).show();
+                            spinner.dismissProgressDialog();
+                         }
+                     }
+
+        );
     }
 }

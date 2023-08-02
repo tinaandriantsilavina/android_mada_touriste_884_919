@@ -3,22 +3,39 @@ package com.madatouriste.vue;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.gson.Gson;
 import com.madatouriste.R;
+import com.madatouriste.modele.CustomResponse;
+import com.madatouriste.modele.Token;
 import com.madatouriste.modele.User;
+import com.madatouriste.service.AuthService;
+import com.madatouriste.service.ProvinceService;
+import com.madatouriste.service.RetrofitClient;
+import com.madatouriste.service.UserService;
+import com.madatouriste.utils.ApiInterface.UserInterface;
+import com.madatouriste.utils.ProgressBuilder;
 import com.madatouriste.utils.Utils;
 
 import java.util.HashMap;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class MainActivity extends AppCompatActivity implements BottomNavigationView
         .OnNavigationItemSelectedListener   {
 
-    private User user;
-    private  boolean  isConnected = true;
+    public User user;
+    SharedPreferences sharedPreferences ; // = getSharedPreferences("auth", MODE_PRIVATE);
+    private  boolean  isConnected = false;
+    private String token;
     ProvinceListFragment provinceListFragment = new ProvinceListFragment();
     RechercheFragment rechercheFragment = new RechercheFragment();
     ProfilFragment profilFragment = new ProfilFragment();
@@ -30,7 +47,23 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initSession();
+        try {
+            sharedPreferences  = getSharedPreferences("auth", MODE_PRIVATE);
+//            AuthService.login();
+//            ProvinceService.getAll();
+//            ProvinceService.getById();
+//            LieuService.getAll();
+//            LieuService.getByIdprovince();
+//            UserService.getInfos();
+//            UserService.register();
+//            UserService.updateInfos();
+//            UserService.updatePassword();
+//            getUserInfo();
+            getInfos();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     private void initBottomMenu() {
@@ -52,6 +85,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             val =  Utils.fragmentNavig(this, profilFragment);
         }else if(((Integer)item.getItemId()).equals(R.id.logout)){
             Toast.makeText(this, "Deconnexion", Toast.LENGTH_SHORT).show();
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.remove("token");
+            editor.apply();
+            onCreate(null);
         }
         return val;
     }
@@ -60,19 +97,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
         super.onPointerCaptureChanged(hasCapture);
-    }
-    public void initSession(){
-//        Utils.saveText(this, "token.txt", "Token2");
-        if(!isConnected){
-            HashMap map = new HashMap();
-            map.put("isConnected", this.isConnected);
-            Utils.redirection(this, LoginActivity.class, map);
-        }else{
-            String token = Utils.loadText(this, "token.txt");
-            initBottomMenu();
-            user = new User("Andry", "Cedric","email","pass");
-        }
-
     }
 
     public User getUser() {
@@ -85,6 +109,48 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     public void setConnected(boolean connected) {
         isConnected = connected;
+    }
+
+    public void getInfos() throws Exception{
+        ProgressBuilder dialog  = new ProgressBuilder(this);
+        dialog.showProgressDialog();
+        String token =  sharedPreferences.getString("token", null);//"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGMzZjcxODU2ZDVjMzY2MTQ0YzI1MDMiLCJub20iOiJyYWtvdG8iLCJwcmVub20iOiJqZWFuIiwiZW1haWwiOiJyYWtvdG9AbWFkYXRvdXIuY29tIiwiaWF0IjoxNjkwOTk4MjAyLCJleHAiOjE2OTE2MDMwMDJ9.pGywT_TvlVZHm1aT9yqHkYC6U5GWPAmKfC5vGhFpVHM";
+        UserInterface userInterface = RetrofitClient.getRetrofitInstance(token).create(UserInterface.class);
+
+        Call<CustomResponse> call = userInterface.getInfos();
+        call.enqueue(new Callback<CustomResponse>() {
+                         @Override
+                         public void onResponse(Call<CustomResponse> call, Response<CustomResponse> response) {
+                             if (response.body().getStatus() == 200) {
+                                 String jsonString = new Gson().toJson(response.body().getDatas());
+                                 User user = new Gson().fromJson(jsonString, User.class);
+                                 Log.e("code", "onResponse: " + response.code() );
+                                 Log.e("status", "onResponse: " + response.body().getStatus());
+                                 Log.e("message", "onResponse: message: " + response.body().getMessage() );
+                                 Log.e("raw_datas", "onResponse: message: " + response.body().getDatas() );
+                                 Log.e("object_data", "onResponse: message: " + user );
+                                 initBottomMenu();
+                             } else {
+                                 Log.e("code", "onResponse: " + response.code());
+                                 Log.e("status", "onResponse: " + response.body().getStatus());
+                                 Log.e("message", "onResponse: message: " + response.body().getMessage());
+                                 HashMap map = new HashMap();
+                                 map.put("isConnected", false);
+                                 Toast.makeText(MainActivity.this, "Erreur=> "+response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                 Utils.redirection(MainActivity.this, LoginActivity.class, map);
+                             }
+                             dialog.dismissProgressDialog();
+                         }
+
+                         @Override
+                         public void onFailure(Call<CustomResponse> call, Throwable t) {
+                             t.printStackTrace();
+                             Log.e("error_message", "onFailure: " + t.getMessage());
+                             dialog.dismissProgressDialog();
+                         }
+                     }
+
+        );
     }
 }
 
