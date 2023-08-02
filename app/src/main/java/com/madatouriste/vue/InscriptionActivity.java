@@ -19,6 +19,7 @@ import java.util.HashMap;
 
 public class InscriptionActivity extends AppCompatActivity {
 
+    private boolean isConnected;
     EditText inscription_txt_nom;
     EditText inscription_txt_prenom;
     EditText inscription_txt_email;
@@ -51,7 +52,11 @@ public class InscriptionActivity extends AppCompatActivity {
         btnInscription = (AppCompatButton) findViewById(R.id.btnInscription);
         passwordIcon = (ImageView) findViewById(R.id.inscription_passwordIcon);
         btnConnexion = ( TextView )findViewById(R.id.btnConnexion) ;
-        Utils.ecouteMenu(this, btnConnexion, LoginActivity.class, new HashMap());
+
+
+        HashMap map = new HashMap();
+        map.put("isConnected", isConnected);
+        Utils.ecouteMenu(this, btnConnexion, LoginActivity.class, map);
         actionBtnPassword();
         actionBtnInscription();
     }
@@ -108,4 +113,14 @@ public class InscriptionActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed(){
+        if(!isConnected){
+
+        }else{
+            super.onBackPressed();
+        }
+    }
+
 }

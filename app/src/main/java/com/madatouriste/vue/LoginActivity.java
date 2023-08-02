@@ -33,7 +33,7 @@ import cz.msebera.android.httpclient.Header;
 
 public class LoginActivity extends AppCompatActivity {
 
-
+    private boolean isConnected;
     EditText user;
     EditText pass;
     Button btnConnexion;
@@ -45,8 +45,8 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_login);
+        isConnected = getIntent().getExtras().getBoolean("isConnected");
         init();
         actionBtnConnexion();
         actionBtnPassword();
@@ -79,7 +79,8 @@ public class LoginActivity extends AppCompatActivity {
         btnConnexion = (Button) findViewById(R.id.btnConnexion);
         btnInscription = (TextView) findViewById(R.id.btnInscription);
         passwordIcon = (ImageView)  findViewById(R.id.passwordIcon);
-        HashMap<String,Province> map = new HashMap<>();
+        HashMap map = new HashMap();
+        map.put("isConnected", isConnected);
         Utils.ecouteMenu(this,btnInscription, InscriptionActivity.class, map );
 
     }
@@ -180,4 +181,20 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed(){
+        if(!isConnected){
+
+        }else{
+            super.onBackPressed();
+        }
+    }
+
+    public boolean isConnected() {
+        return isConnected;
+    }
+
+    public void setConnected(boolean connected) {
+        isConnected = connected;
+    }
 }

@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         .OnNavigationItemSelectedListener   {
 
     private User user;
+    private  boolean  isConnected = true;
     ProvinceListFragment provinceListFragment = new ProvinceListFragment();
     RechercheFragment rechercheFragment = new RechercheFragment();
     ProfilFragment profilFragment = new ProfilFragment();
@@ -63,8 +64,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     }
     public void initSession(){
 //        Utils.saveText(this, "token.txt", "Token2");
-        if(false){
-            Utils.redirection(this, LoginActivity.class, new HashMap<>());
+        if(!isConnected){
+            HashMap map = new HashMap();
+            map.put("isConnected", this.isConnected);
+            Utils.redirection(this, LoginActivity.class, map);
         }else{
             String token = Utils.loadText(this, "token.txt");
             initBottomMenu();
@@ -75,6 +78,14 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     public User getUser() {
         return user;
+    }
+
+    public boolean isConnected() {
+        return isConnected;
+    }
+
+    public void setConnected(boolean connected) {
+        isConnected = connected;
     }
 }
 
