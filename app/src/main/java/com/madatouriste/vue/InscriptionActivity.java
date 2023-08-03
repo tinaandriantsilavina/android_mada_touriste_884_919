@@ -20,6 +20,7 @@ import com.madatouriste.modele.CustomResponse;
 import com.madatouriste.modele.Token;
 import com.madatouriste.service.RetrofitClient;
 import com.madatouriste.utils.ApiInterface.UserInterface;
+import com.madatouriste.utils.ProgressBuilder;
 import com.madatouriste.utils.Utils;
 import com.madatouriste.utils.template_json.RegisterJson;
 
@@ -144,7 +145,8 @@ public class InscriptionActivity extends AppCompatActivity {
 
     public void register(String nom,String prenom, String email, String mdp) throws Exception{
         UserInterface userInterface = RetrofitClient.getRetrofitInstance().create(UserInterface.class);
-
+        ProgressBuilder spinner = new ProgressBuilder(this);
+        spinner.showProgressDialog();
         RegisterJson input = new RegisterJson();
         input.setNom(nom);
         input.setPrenom(prenom);
@@ -165,11 +167,13 @@ public class InscriptionActivity extends AppCompatActivity {
                                  Utils.logger(response);
                                  Toast.makeText(InscriptionActivity.this, "Erreur=>: "+response.body().getMessage(), Toast.LENGTH_SHORT).show();
                              }
+                             spinner.dismissProgressDialog();
                          }
                          @Override
                          public void onFailure(Call<CustomResponse> call, Throwable t) {
                              Log.e("error_message", "onFailure: " + t.getMessage());
                              Toast.makeText(InscriptionActivity.this, "Erreur WS: "+t.getMessage(), Toast.LENGTH_SHORT).show();
+                            spinner.dismissProgressDialog();
                          }
                      }
         );

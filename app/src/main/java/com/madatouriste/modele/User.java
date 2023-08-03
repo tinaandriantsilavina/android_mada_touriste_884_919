@@ -1,6 +1,8 @@
 package com.madatouriste.modele;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     String _id;
     String nom;
     String prenom;

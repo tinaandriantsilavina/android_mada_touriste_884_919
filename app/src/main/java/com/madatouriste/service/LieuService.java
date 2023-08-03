@@ -9,13 +9,14 @@ import com.madatouriste.modele.Lieu;
 import com.madatouriste.modele.Token;
 import com.madatouriste.utils.ApiInterface.LieuInterface;
 
+import java.io.Serializable;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LieuService {
+public class LieuService implements Serializable {
     public static void getAll() throws Exception {
         String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGMzZjcxODU2ZDVjMzY2MTQ0YzI1MDMiLCJub20iOiJyYWtvdG8iLCJwcmVub20iOiJiZSIsImVtYWlsIjoicmFrb3RvQG1hZGF0b3VyLmNvbSIsImlhdCI6MTY5MDkyNjczOSwiZXhwIjoxNjkxNTMxNTM5fQ.VdC4_qJQe1NOCDAT_tEPW409hAbjb1F-HrmYNvizqkE";
         LieuInterface lieuInterface = RetrofitClient.getRetrofitInstance().create(LieuInterface.class);

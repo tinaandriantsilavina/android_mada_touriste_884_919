@@ -1,8 +1,9 @@
 package com.madatouriste.modele;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Lieu {
+public class Lieu implements Serializable {
     String _id;
     String idprovince;
     String nom;

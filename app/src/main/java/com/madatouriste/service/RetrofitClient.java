@@ -13,7 +13,7 @@ public class RetrofitClient {
     public static Retrofit retrofit;
     //    private static final String BASE_URL = "http://192.168.88.101:3900";
     public static OkHttpClient client;
-    private static final String BASE_URL = "http://192.168.56.1:3900";
+    public  static final String BASE_URL = "http://192.168.56.1:3900";
 //    private static final String BASE_URL = "https://tourism-3f7a.onrender.com";
 
     public static Retrofit getRetrofitInstance() {
