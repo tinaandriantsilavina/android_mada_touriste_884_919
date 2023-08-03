@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.madatouriste.R;
@@ -21,9 +22,10 @@ import com.madatouriste.adapter.ImageAdapter;
 import com.madatouriste.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ImageGallerieFragment extends Fragment {
-
+    List<String> imageObjects;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,19 +42,21 @@ public class ImageGallerieFragment extends Fragment {
 
 
     public void init(View v){
-        ArrayList<String> imageObjects = Utils.getImage();
+        if(imageObjects!=null){
+            GridView gridView = v.findViewById(R.id.myGrid);
+            gridView.setAdapter(new ImageAdapter(imageObjects, getActivity()));
+            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                    String imageUrl = imageObjects.get(position);
 
-        GridView gridView = v.findViewById(R.id.myGrid);
-        gridView.setAdapter(new ImageAdapter(imageObjects, getActivity()));
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                String imageUrl = imageObjects.get(position);
+                    showDialogBox(imageUrl);
+                }
 
-                showDialogBox(imageUrl);
-            }
-
-        });
+            });
+        }else{
+            Toast.makeText(getActivity(), "erreur sur image", Toast.LENGTH_SHORT).show();
+        }
     }
 
 
@@ -93,5 +97,9 @@ public class ImageGallerieFragment extends Fragment {
         });
 
         dialog.show();
+    }
+
+    public void setImageObjects(List<String> i){
+        this.imageObjects = i;
     }
 }

@@ -132,6 +132,8 @@ public class ProvinceDetailFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 ImageGallerieFragment imageGallerieFragment = new ImageGallerieFragment();
+                imageGallerieFragment.setImageObjects(province.getImages());
+                //imageGallerieFragment.setImageObjects(Utils.getImage());
                 Utils.fragmentNavig(getActivity(), imageGallerieFragment);
                 Toast.makeText(getActivity(), "Clic sur : Photo" , Toast.LENGTH_SHORT).show();
             }

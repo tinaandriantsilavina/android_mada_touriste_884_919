@@ -60,7 +60,8 @@ public class ProvinceListFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 ProvinceDetailFragment detail = new ProvinceDetailFragment();
                 Bundle b = new Bundle();
-                initProvinceStatic();b.putSerializable("province", provinceStatic );//b.putSerializable("province", provinceList.get(i) );
+//                initProvinceStatic();b.putSerializable("province", provinceStatic );
+                b.putSerializable("province", provinceList.get(i) );
                 detail.setArguments(b);
                 Utils.fragmentNavig(getActivity(),detail);
 
@@ -71,44 +72,44 @@ public class ProvinceListFragment extends Fragment {
 
     public  void getAllProvinces() throws Exception{
 
-        ArrayList<String> imageUrls = Utils.getImage();
-        String[] nameList = {"Pasta", "Maggi", "Cake", "Pancake", "Pizza", "Burgers", "Fries"};
-        provinceList = new ArrayList<>();
-        for (int i = 0; i < imageUrls.size(); i++) {
-            Province province = new Province(nameList[i], imageUrls.get(i));
-            provinceList.add(province);
-        }
-        initListProvince();
-//        ProgressBuilder spinner = new ProgressBuilder(getActivity());
-//        spinner.showProgressDialog();
-//        String token = Utils.getToken(getActivity());
-//        ProvinceInterface provinceInterface = RetrofitClient.getRetrofitInstance().create(ProvinceInterface.class);
-//
-//        Call<CustomResponse> call = provinceInterface.getAllProvince(new Token(token).getBearerToken());
-//        call.enqueue(new Callback<CustomResponse>() {
-//                         @Override
-//                         public void onResponse(Call<CustomResponse> call, Response<CustomResponse> response) {
-//                             if (response.body().getStatus() == 200) {
-//                                 String jsonString = new Gson().toJson(response.body().getDatas());
-//                                 Utils.logger(response);
-//                                 provinceList = new Gson().fromJson(jsonString, new TypeToken<List<Province>>(){}.getType());
-//                                 initListProvince();
-//                             } else {
-//                                 Utils.logger(response);
-//                                 Toast.makeText(getActivity(), "Erreur: "+response.body().getMessage(), Toast.LENGTH_SHORT).show();
-////                                 Utils.redirection(getActivity(),MainActivity.class, new HashMap<>());
-//                             }
-//                             spinner.dismissProgressDialog();
-//                         }
-//                         @Override
-//                         public void onFailure(Call<CustomResponse> call, Throwable t) {
-//                             Log.e("error_message", "onFailure: " + t.getMessage());
-//                             Toast.makeText(getActivity(), "Erreur WS: "+t.getMessage(), Toast.LENGTH_SHORT).show();
-//                             spinner.dismissProgressDialog();
-//                         }
-//                     }
-//
-//        );
+//        ArrayList<String> imageUrls = Utils.getImage();
+//        String[] nameList = {"Pasta", "Maggi", "Cake", "Pancake", "Pizza", "Burgers", "Fries"};
+//        provinceList = new ArrayList<>();
+//        for (int i = 0; i < imageUrls.size(); i++) {
+//            Province province = new Province(nameList[i], imageUrls.get(i));
+//            provinceList.add(province);
+//        }
+//        initListProvince();
+        ProgressBuilder spinner = new ProgressBuilder(getActivity());
+        spinner.showProgressDialog();
+        String token = Utils.getToken(getActivity());
+        ProvinceInterface provinceInterface = RetrofitClient.getRetrofitInstance().create(ProvinceInterface.class);
+
+        Call<CustomResponse> call = provinceInterface.getAllProvince(new Token(token).getBearerToken());
+        call.enqueue(new Callback<CustomResponse>() {
+                         @Override
+                         public void onResponse(Call<CustomResponse> call, Response<CustomResponse> response) {
+                             if (response.body().getStatus() == 200) {
+                                 String jsonString = new Gson().toJson(response.body().getDatas());
+                                 Utils.logger(response);
+                                 provinceList = new Gson().fromJson(jsonString, new TypeToken<List<Province>>(){}.getType());
+                                 initListProvince();
+                             } else {
+                                 Utils.logger(response);
+                                 Toast.makeText(getActivity(), "Erreur: "+response.body().getMessage(), Toast.LENGTH_SHORT).show();
+//                                 Utils.redirection(getActivity(),MainActivity.class, new HashMap<>());
+                             }
+                             spinner.dismissProgressDialog();
+                         }
+                         @Override
+                         public void onFailure(Call<CustomResponse> call, Throwable t) {
+                             Log.e("error_message", "onFailure: " + t.getMessage());
+                             Toast.makeText(getActivity(), "Erreur WS: "+t.getMessage(), Toast.LENGTH_SHORT).show();
+                             spinner.dismissProgressDialog();
+                         }
+                     }
+
+        );
     }
 
     public void getById(String idprovince) throws Exception{
