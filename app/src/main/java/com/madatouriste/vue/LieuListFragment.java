@@ -112,6 +112,8 @@ public class LieuListFragment extends Fragment {
     }
 
     public void getByIdprovince(String idprovince) throws Exception {
+        ProgressBuilder spinner = new ProgressBuilder(getActivity());
+        spinner.showProgressDialog();
         String token= Utils.getToken(getActivity());
         LieuInterface authInterface = RetrofitClient.getRetrofitInstance().create(LieuInterface.class);
 
@@ -126,16 +128,18 @@ public class LieuListFragment extends Fragment {
                                     Utils.logger(response);
                              } else {
                                  Utils.logger(response);
-//                                 Toast.makeText(getActivity(), "erreur", Toast.LENGTH_SHORT).show();
+                                 Toast.makeText(getActivity(), "Erreur: "+response.message(), Toast.LENGTH_SHORT).show();
                              }
+                             spinner.dismissProgressDialog();
                          }
 
                          @Override
                          public void onFailure(Call<CustomResponse> call, Throwable t) {
                              Log.e("error_message", "onFailure: " + t.getMessage());
+                             Toast.makeText(getActivity(), "Erreur WS : "+t.getMessage(), Toast.LENGTH_SHORT).show();
+                             spinner.dismissProgressDialog();
                          }
                      }
-
         );
     }
 
