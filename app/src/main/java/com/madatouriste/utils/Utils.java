@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -23,6 +24,9 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.madatouriste.R;
+import com.madatouriste.modele.CustomResponse;
+import com.madatouriste.modele.Token;
+import com.madatouriste.vue.MainActivity;
 
 import org.json.JSONArray;
 
@@ -37,6 +41,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+
+import retrofit2.Response;
 
 public  abstract class Utils {
     /**
@@ -276,5 +282,32 @@ public  abstract class Utils {
                 .addToBackStack(null)
                 .commit();
         return true;
+    }
+
+    public static String getToken(Context context){
+        SharedPreferences sharedPreferences = context.getSharedPreferences("auth", context.MODE_PRIVATE);
+        String token = sharedPreferences.getString("token", null);
+        return token;
+    }
+
+    public static  void setToken(Context context , Token token){
+        SharedPreferences sharedPreferences = context.getSharedPreferences("auth", context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("token", token.getToken());
+        editor.apply();
+    }
+
+    public static void clearToken(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("auth", context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+    }
+
+    public static void logger(Response<CustomResponse> response){
+        Log.e("code", "onResponse: " + response.code() );
+        Log.e("status", "onResponse: " + response.body().getStatus());
+        Log.e("message", "onResponse: message: " + response.body().getMessage() );
+        Log.e("raw_datas", "onResponse: message: " + response.body().getDatas() );
     }
 }

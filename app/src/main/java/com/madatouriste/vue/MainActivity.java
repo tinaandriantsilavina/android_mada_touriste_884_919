@@ -2,8 +2,6 @@ package com.madatouriste.vue;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -33,7 +31,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         .OnNavigationItemSelectedListener   {
 
     public User user;
-    SharedPreferences sharedPreferences ; // = getSharedPreferences("auth", MODE_PRIVATE);
     private  boolean  isConnected = false;
     private String token;
     ProvinceListFragment provinceListFragment = new ProvinceListFragment();
@@ -48,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         try {
-            sharedPreferences  = getSharedPreferences("auth", MODE_PRIVATE);
 //            AuthService.login();
 //            ProvinceService.getAll();
 //            ProvinceService.getById();
@@ -85,16 +81,13 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             val =  Utils.fragmentNavig(this, profilFragment);
         }else if(((Integer)item.getItemId()).equals(R.id.logout)){
             Toast.makeText(this, "Deconnexion", Toast.LENGTH_SHORT).show();
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.clear();
-            editor.apply();
+            Utils.clearToken(MainActivity.this);
             HashMap map = new HashMap();
             map.put("isConnected", false);
             Utils.redirection(MainActivity.this, LoginActivity.class, map);
         }
         return val;
     }
-
 
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
@@ -117,8 +110,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     public  void getUserInfo() throws Exception{
 
         ProgressBuilder dialog  = new ProgressBuilder(this);
-        sharedPreferences  = getSharedPreferences("auth", MODE_PRIVATE);
-        String token = sharedPreferences.getString("token", null);
+        String token = Utils.getToken(MainActivity.this);
         UserInterface userInterface = RetrofitClient.getRetrofitInstance().create(UserInterface.class);
 //
         Call<CustomResponse> call = userInterface.getInfos(token);
@@ -130,30 +122,24 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                                  String jsonString = new Gson().toJson(response.body().getDatas());
                                  User u = new Gson().fromJson(jsonString, User.class);
                                  user = u;
-                                 Log.e("code", "onResponse: " + response.code() );
-                                 Log.e("status", "onResponse: " + response.body().getStatus());
-                                 Log.e("message", "onResponse: message: " + response.body().getMessage() );
-                                 Log.e("raw_datas", "onResponse: message: " + response.body().getDatas() );
-                                 Log.e("object_data", "onResponse: message: " + user );
+                                 Utils.logger(response);
                                  initBottomMenu();
-
                              } else {
-                                 Log.e("code", "onResponse: " + response.code());
-                                 Log.e("status", "onResponse: " + response.body().getStatus());
-                                 Log.e("message", "onResponse: message: " + response.body().getMessage());
+                                 Utils.logger(response);
                                  HashMap map = new HashMap();
                                  map.put("isConnected", false);
                                  Utils.redirection(MainActivity.this, LoginActivity.class, map);
                              }
+                             Utils.logger(response);
                              dialog.dismissProgressDialog();
                          }
                          @Override
                          public void onFailure(Call<CustomResponse> call, Throwable t) {
                              Log.e("error_message", "onFailure: " + t.getMessage());
+                             Toast.makeText(MainActivity.this, "Erreur connexion WS: "+t.getMessage(), Toast.LENGTH_SHORT).show();
                              dialog.dismissProgressDialog();
                          }
                      }
-
         );
     }
 }

@@ -142,7 +142,6 @@ public class LoginActivity extends AppCompatActivity {
                          public void onResponse(Call<CustomResponse> call, Response<CustomResponse> response) {
                              Token token = new Gson().fromJson(response.body().getDatas().toString(), Token.class);
                              if(token.getToken()!=null){
-//                                 Utils.saveText(LoginActivity.this,"token.txt",token.getToken());
                                  SharedPreferences sharedPreferences = getSharedPreferences("auth", MODE_PRIVATE);
                                  SharedPreferences.Editor editor = sharedPreferences.edit();
                                  editor.putString("token", token.getToken());
@@ -153,10 +152,7 @@ public class LoginActivity extends AppCompatActivity {
                              }else{
                                  Toast.makeText(LoginActivity.this, "Email et/ou Mot de passe  incorrecte ", Toast.LENGTH_SHORT).show();
                              }
-                             Log.e("code", "onResponse: " + response.code() );
-                             Log.e("message", "onResponse: message: " + response.body().getMessage() );
-                             Log.e("raw_datas", "onResponse: message: " + response.body().getDatas() );
-                             Log.e("token_object", "onResponse: message: " + token.getToken() );
+                            Utils.logger(response);
                             spinner.dismissProgressDialog();
                          }
 

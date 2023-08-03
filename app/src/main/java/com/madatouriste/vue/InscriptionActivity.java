@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.util.Util;
 import com.google.gson.Gson;
 import com.madatouriste.R;
 import com.madatouriste.modele.CustomResponse;
@@ -157,20 +158,18 @@ public class InscriptionActivity extends AppCompatActivity {
                              if (response.body().getStatus() == 200) {
                                  String jsonString = new Gson().toJson(response.body().getDatas());
                                  Token token = new Gson().fromJson(jsonString, Token.class);
-                                 Log.e("code", "onResponse: " + response.code() );
-                                 Log.e("status", "onResponse: " + response.body().getStatus());
-                                 Log.e("message", "onResponse: message: " + response.body().getMessage() );
-                                 Log.e("raw_datas", "onResponse: message: " + response.body().getDatas() );
-                                 Log.e("object_data", "onResponse: message: " + token );
+                                 Utils.logger(response);
+                                 Utils.setToken(InscriptionActivity.this, token);
+                                 Utils.redirection(InscriptionActivity.this, MainActivity.class, new HashMap<>());
                              } else {
-                                 Log.e("code", "onResponse: " + response.code());
-                                 Log.e("status", "onResponse: " + response.body().getStatus());
-                                 Log.e("message", "onResponse: message: " + response.body().getMessage());
+                                 Utils.logger(response);
+                                 Toast.makeText(InscriptionActivity.this, "Erreur=>: "+response.body().getMessage(), Toast.LENGTH_SHORT).show();
                              }
                          }
                          @Override
                          public void onFailure(Call<CustomResponse> call, Throwable t) {
                              Log.e("error_message", "onFailure: " + t.getMessage());
+                             Toast.makeText(InscriptionActivity.this, "Erreur WS: "+t.getMessage(), Toast.LENGTH_SHORT).show();
                          }
                      }
         );
