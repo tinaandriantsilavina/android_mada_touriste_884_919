@@ -1,12 +1,14 @@
 package com.madatouriste.vue;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
@@ -19,24 +21,29 @@ import com.madatouriste.adapter.ImageAdapter;
 import com.madatouriste.utils.Utils;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class ImageGallerieActivity extends AppCompatActivity {
+public class ImageGallerieFragment extends Fragment {
 
-    private List<Integer> mThumbIds;
-    private Context mContext;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_image_gallerie);
-        init();
     }
 
-    public void init(){
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View v =inflater.inflate(R.layout.fragment_image_gallerie, container, false);
+        init(v);
+        // Inflate the layout for this fragment
+        return v ;
+    }
+
+
+    public void init(View v){
         ArrayList<String> imageObjects = Utils.getImage();
 
-        GridView gridView = findViewById(R.id.myGrid);
-        gridView.setAdapter(new ImageAdapter(imageObjects, this));
+        GridView gridView = v.findViewById(R.id.myGrid);
+        gridView.setAdapter(new ImageAdapter(imageObjects, getActivity()));
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
@@ -50,7 +57,7 @@ public class ImageGallerieActivity extends AppCompatActivity {
 
 
     public void showDialogBox(String imageUrl) {
-        final Dialog dialog = new Dialog(this);
+        final Dialog dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.fragment_layout);
 
         // Getting custom dialog views
@@ -79,7 +86,7 @@ public class ImageGallerieActivity extends AppCompatActivity {
         btn_Full.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ImageGallerieActivity.this, ImageFullViewActivity.class);
+                Intent i = new Intent(getActivity(), ImageFullViewActivity.class);
                 i.putExtra("img_url", imageUrl);
                 startActivity(i);
             }

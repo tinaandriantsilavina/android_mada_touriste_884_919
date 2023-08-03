@@ -28,9 +28,6 @@
             android:name=".vue.ImageFullViewActivity"
             android:exported="false" />
         <activity
-            android:name=".vue.ImageGallerieActivity"
-            android:exported="false" />
-        <activity
             android:name=".vue.MainActivity"
             android:exported="true">
             <intent-filter>
