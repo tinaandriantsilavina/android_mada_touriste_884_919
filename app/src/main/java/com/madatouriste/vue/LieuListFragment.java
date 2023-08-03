@@ -39,6 +39,8 @@ public class LieuListFragment extends Fragment {
     FragmentLieuListBinding binding;
     List<Lieu> lieuList;
 
+    String idProvince=null;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +52,11 @@ public class LieuListFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentLieuListBinding.inflate(inflater, container, false);
         try {
-            getAll();
-//            getAllProvinces();
+            if(idProvince!=null && !idProvince.isEmpty()){
+                getByIdprovince();
+            }else{
+                getAll();
+            }
         } catch (Exception e) {
             Toast.makeText(getActivity(), "Erreur: "+e.getMessage(), Toast.LENGTH_SHORT).show();;
         }
@@ -65,12 +70,11 @@ public class LieuListFragment extends Fragment {
         binding.listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                ProvinceDetailFragment detail = new ProvinceDetailFragment();
+                LieuDetailFragment detail = new LieuDetailFragment();
                 Bundle b = new Bundle();
                 b.putSerializable("lieu", lieuList.get(i) );
                 detail.setArguments(b);
                 Utils.fragmentNavig(getActivity(),detail);
-
             }
         });
     }
@@ -111,36 +115,41 @@ public class LieuListFragment extends Fragment {
         );
     }
 
-    public void getByIdprovince(String idprovince) throws Exception {
-        ProgressBuilder spinner = new ProgressBuilder(getActivity());
-        spinner.showProgressDialog();
-        String token= Utils.getToken(getActivity());
-        LieuInterface authInterface = RetrofitClient.getRetrofitInstance().create(LieuInterface.class);
+    public void getByIdprovince() throws Exception {
+        if(!idProvince.isEmpty() && idProvince!=null){
+            ProgressBuilder spinner = new ProgressBuilder(getActivity());
+            spinner.showProgressDialog();
+            String token= Utils.getToken(getActivity());
+            LieuInterface authInterface = RetrofitClient.getRetrofitInstance().create(LieuInterface.class);
 
 //        String idprovince = "64c3d9a8e1d443289a3a15fe";
-        Call<CustomResponse> call = authInterface.getLieuByIdprovince(new Token(token).getBearerToken(), idprovince);
-        call.enqueue(new Callback<CustomResponse>() {
-                         @Override
-                         public void onResponse(Call<CustomResponse> call, Response<CustomResponse> response) {
-                             if (response.body().getStatus() == 200) {
-                                 String jsonString = new Gson().toJson(response.body().getDatas());
-                                 Lieu lieu = new Gson().fromJson(jsonString, Lieu.class);
-                                    Utils.logger(response);
-                             } else {
-                                 Utils.logger(response);
-                                 Toast.makeText(getActivity(), "Erreur: "+response.message(), Toast.LENGTH_SHORT).show();
+            Call<CustomResponse> call = authInterface.getLieuByIdprovince(new Token(token).getBearerToken(), idProvince);
+            call.enqueue(new Callback<CustomResponse>() {
+                             @Override
+                             public void onResponse(Call<CustomResponse> call, Response<CustomResponse> response) {
+                                 if (response.body().getStatus() == 200) {
+                                     String jsonString = new Gson().toJson(response.body().getDatas());
+                                     lieuList = new Gson().fromJson(jsonString, new TypeToken<List<Lieu>>(){}.getType());
+                                     Utils.logger(response);
+                                 } else {
+                                     Utils.logger(response);
+                                     Toast.makeText(getActivity(), "Erreur: "+response.message(), Toast.LENGTH_SHORT).show();
+                                 }
+                                 spinner.dismissProgressDialog();
                              }
-                             spinner.dismissProgressDialog();
-                         }
 
-                         @Override
-                         public void onFailure(Call<CustomResponse> call, Throwable t) {
-                             Log.e("error_message", "onFailure: " + t.getMessage());
-                             Toast.makeText(getActivity(), "Erreur WS : "+t.getMessage(), Toast.LENGTH_SHORT).show();
-                             spinner.dismissProgressDialog();
+                             @Override
+                             public void onFailure(Call<CustomResponse> call, Throwable t) {
+                                 Log.e("error_message", "onFailure: " + t.getMessage());
+                                 Toast.makeText(getActivity(), "Erreur WS : "+t.getMessage(), Toast.LENGTH_SHORT).show();
+                                 spinner.dismissProgressDialog();
+                             }
                          }
-                     }
-        );
+            );
+        }else{
+            Toast.makeText(getActivity(), "Veuillez selection l'id porovince", Toast.LENGTH_SHORT).show();
+        }
     }
+
 
 }

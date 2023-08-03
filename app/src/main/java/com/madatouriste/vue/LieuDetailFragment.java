@@ -28,8 +28,6 @@ import java.util.List;
 public class LieuDetailFragment extends Fragment {
 
     Lieu lieu;
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +39,6 @@ public class LieuDetailFragment extends Fragment {
        View v = inflater.inflate(R.layout.fragment_lieu_detail, container, false);
         if(getArguments()!=null && getArguments().getSerializable("lieu")!=null){
             lieu = (Lieu) getArguments().getSerializable("lieu");
-            initProvince();
             initEntete(v);
             initDescription(v);
             initMenu(v);
@@ -53,15 +50,7 @@ public class LieuDetailFragment extends Fragment {
 
 
 
-    public void initProvince() {
-        try{
-            ObjectMapper objectMapper = new ObjectMapper();
-            String json2 = ProvinceConstant.propvince;
-//            province = objectMapper.readValue(json2, Province.class);
-        }catch (Exception ex){
-            Toast.makeText(getActivity(), "Erreur ", Toast.LENGTH_SHORT).show();
-        }
-    }
+
     public void initEntete(View v){
         LinearLayout layout = v.findViewById(R.id.fragment_province_detail_layout);
 //        layout.setBackground();
@@ -102,39 +91,16 @@ public class LieuDetailFragment extends Fragment {
     }
 
     public void initMenu(View v){
-        Button btnLieu = v.findViewById(R.id.fragment_province_detail_menu_btnLieu);
-        btnLieu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "Clic sur : lieu" , Toast.LENGTH_SHORT).show();
-                LieuListFragment lieuListFragment = new LieuListFragment();
-//                imageGallerieFragment.setImageObjects(province.getImages());
-                //imageGallerieFragment.setImageObjects(Utils.getImage());
-                Utils.fragmentNavig(getActivity(), lieuListFragment);
-            }
-        });
 
         Button btnPhoto = v.findViewById(R.id.fragment_province_detail_menu_btnPhoto);
         btnPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImageGallerieFragment imageGallerieFragment = new ImageGallerieFragment();
-                imageGallerieFragment.setImageObjects(lieu.getImages());
-                //imageGallerieFragment.setImageObjects(Utils.getImage());
-                Utils.fragmentNavig(getActivity(), imageGallerieFragment);
-                Toast.makeText(getActivity(), "Clic sur : Photo" , Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        Button btnVideo = v.findViewById(R.id.fragment_province_detail_menu_btnVideo);
-        btnVideo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                HashMap<String, Province> map = new HashMap<>();
-//                Utils.ecouteMenu(getActivity(), btnVideo, VideoActivity.class, map);
-                VideoFragment video = new VideoFragment();
-                Utils.fragmentNavig(getActivity(), video);
-                Toast.makeText(getActivity(), "Clic sur : btnVideo" , Toast.LENGTH_SHORT).show();
+//                ImageGallerieFragment imageGallerieFragment = new ImageGallerieFragment();
+//                imageGallerieFragment.setImageObjects(lieu.getImages());
+//                //imageGallerieFragment.setImageObjects(Utils.getImage());
+//                Utils.fragmentNavig(getActivity(), imageGallerieFragment);
+                Toast.makeText(getActivity(), "Clic sur : Photo Lieu" , Toast.LENGTH_SHORT).show();
             }
         });
     }

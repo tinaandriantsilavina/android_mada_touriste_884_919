@@ -30,17 +30,17 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Full View"
+            android:text="Etirer"
             android:textColor="#fff"
-            android:background="@color/design_default_color_secondary_variant"
+            android:background="@drawable/ripple_effect_raised_jaune"
             />
         <Button
             android:id="@+id/btn_close"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Close"
+            android:text="Fermer"
             android:textColor="#fff"
-            android:background="#000"
+            android:background="@drawable/ripple_effect_raised_vert"
             android:layout_weight="1"
             />
     </LinearLayout>
