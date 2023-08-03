@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.madatouriste.modele.CustomResponse;
 import com.madatouriste.modele.Province;
+import com.madatouriste.modele.Token;
 import com.madatouriste.utils.ApiInterface.ProvinceInterface;
 import com.madatouriste.vue.LoginActivity;
 
@@ -18,10 +19,10 @@ import retrofit2.Response;
 
 public class ProvinceService {
     public static void getAll() throws Exception{
-        String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGMzZjcxODU2ZDVjMzY2MTQ0YzI1MDMiLCJub20iOiJyYWtvdG8iLCJwcmVub20iOiJqZWFuIiwiZW1haWwiOiJyYWtvdG9AbWFkYXRvdXIuY29tIiwiaWF0IjoxNjkwOTk4MjAyLCJleHAiOjE2OTE2MDMwMDJ9.pGywT_TvlVZHm1aT9yqHkYC6U5GWPAmKfC5vGhFpVHM";
-        ProvinceInterface provinceInterface = RetrofitClient.getRetrofitInstance(token).create(ProvinceInterface.class);
+        String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGMzZjcxODU2ZDVjMzY2MTQ0YzI1MDMiLCJub20iOiJyYWtvdG8iLCJwcmVub20iOiJiZSIsImVtYWlsIjoicmFrb3RvQG1hZGF0b3VyLmNvbSIsImlhdCI6MTY5MDkyNjczOSwiZXhwIjoxNjkxNTMxNTM5fQ.VdC4_qJQe1NOCDAT_tEPW409hAbjb1F-HrmYNvizqkE";
+        ProvinceInterface provinceInterface = RetrofitClient.getRetrofitInstance().create(ProvinceInterface.class);
 
-        Call<CustomResponse> call = provinceInterface.getAllProvince();
+        Call<CustomResponse> call = provinceInterface.getAllProvince(new Token(token).getBearerToken());
         call.enqueue(new Callback<CustomResponse>() {
                          @Override
                          public void onResponse(Call<CustomResponse> call, Response<CustomResponse> response) {
@@ -33,7 +34,6 @@ public class ProvinceService {
                                  Log.e("message", "onResponse: message: " + response.body().getMessage() );
                                  Log.e("raw_datas", "onResponse: message: " + response.body().getDatas() );
                                  Log.e("object_data", "onResponse: message: " + provinces );
-//                                 Toast.makeText(LoginActivity, "ketria", Toast.LENGTH_SHORT).show();
                              } else {
                                  Log.e("code", "onResponse: " + response.code());
                                  Log.e("status", "onResponse: " + response.body().getStatus());
@@ -52,10 +52,10 @@ public class ProvinceService {
 
     public static void getById() throws Exception{
         String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGMzZjcxODU2ZDVjMzY2MTQ0YzI1MDMiLCJub20iOiJyYWtvdG8iLCJwcmVub20iOiJiZSIsImVtYWlsIjoicmFrb3RvQG1hZGF0b3VyLmNvbSIsImlhdCI6MTY5MDkyNjczOSwiZXhwIjoxNjkxNTMxNTM5fQ.VdC4_qJQe1NOCDAT_tEPW409hAbjb1F-HrmYNvizqkE";
-        ProvinceInterface provinceInterface = RetrofitClient.getRetrofitInstance(token).create(ProvinceInterface.class);
+        ProvinceInterface provinceInterface = RetrofitClient.getRetrofitInstance().create(ProvinceInterface.class);
 
         String idprovince = "64c3da07350c5c84510c3267";
-        Call<CustomResponse> call = provinceInterface.getByIdprovince(idprovince);
+        Call<CustomResponse> call = provinceInterface.getByIdprovince(new Token(token).getBearerToken(), idprovince);
         call.enqueue(new Callback<CustomResponse>() {
                          @Override
                          public void onResponse(Call<CustomResponse> call, Response<CustomResponse> response) {

@@ -115,45 +115,45 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         HashMap map = new HashMap();
         map.put("isConnected", false);
         Utils.redirection(MainActivity.this, LoginActivity.class, map);
-//        ProgressBuilder dialog  = new ProgressBuilder(this);
-//        SharedPreferences sharedPreferences  = getSharedPreferences("auth", MODE_PRIVATE);
-//        String token = sharedPreferences.getString("token", null);
-//        UserInterface userInterface = RetrofitClient.getRetrofitInstance(token).create(UserInterface.class);
-////
-//        Call<CustomResponse> call = userInterface.getInfos();
-//        dialog.showProgressDialog();
-//        call.enqueue(new Callback<CustomResponse>() {
-//                         @Override
-//                         public void onResponse(Call<CustomResponse> call, Response<CustomResponse> response) {
-//                             if (response.body().getStatus() == 200) {
-//                                 String jsonString = new Gson().toJson(response.body().getDatas());
-//                                 User u = new Gson().fromJson(jsonString, User.class);
-//                                 user = u;
-//                                 Log.e("code", "onResponse: " + response.code() );
-//                                 Log.e("status", "onResponse: " + response.body().getStatus());
-//                                 Log.e("message", "onResponse: message: " + response.body().getMessage() );
-//                                 Log.e("raw_datas", "onResponse: message: " + response.body().getDatas() );
-//                                 Log.e("object_data", "onResponse: message: " + user );
-//                                 initBottomMenu();
+        ProgressBuilder dialog  = new ProgressBuilder(this);
+        SharedPreferences sharedPreferences  = getSharedPreferences("auth", MODE_PRIVATE);
+        String token = sharedPreferences.getString("token", null);
+        UserInterface userInterface = RetrofitClient.getRetrofitInstance().create(UserInterface.class);
 //
-//                             } else {
-//                                 Log.e("code", "onResponse: " + response.code());
-//                                 Log.e("status", "onResponse: " + response.body().getStatus());
-//                                 Log.e("message", "onResponse: message: " + response.body().getMessage());
-//                                 HashMap map = new HashMap();
-//                                 map.put("isConnected", false);
-//                                 Utils.redirection(MainActivity.this, LoginActivity.class, map);
-//                             }
-//                             dialog.dismissProgressDialog();
-//                         }
-//                         @Override
-//                         public void onFailure(Call<CustomResponse> call, Throwable t) {
-//                             Log.e("error_message", "onFailure: " + t.getMessage());
-//                             dialog.dismissProgressDialog();
-//                         }
-//                     }
-//
-//        );
+        Call<CustomResponse> call = userInterface.getInfos(token);
+        dialog.showProgressDialog();
+        call.enqueue(new Callback<CustomResponse>() {
+                         @Override
+                         public void onResponse(Call<CustomResponse> call, Response<CustomResponse> response) {
+                             if (response.body().getStatus() == 200) {
+                                 String jsonString = new Gson().toJson(response.body().getDatas());
+                                 User u = new Gson().fromJson(jsonString, User.class);
+                                 user = u;
+                                 Log.e("code", "onResponse: " + response.code() );
+                                 Log.e("status", "onResponse: " + response.body().getStatus());
+                                 Log.e("message", "onResponse: message: " + response.body().getMessage() );
+                                 Log.e("raw_datas", "onResponse: message: " + response.body().getDatas() );
+                                 Log.e("object_data", "onResponse: message: " + user );
+                                 initBottomMenu();
+
+                             } else {
+                                 Log.e("code", "onResponse: " + response.code());
+                                 Log.e("status", "onResponse: " + response.body().getStatus());
+                                 Log.e("message", "onResponse: message: " + response.body().getMessage());
+                                 HashMap map = new HashMap();
+                                 map.put("isConnected", false);
+                                 Utils.redirection(MainActivity.this, LoginActivity.class, map);
+                             }
+                             dialog.dismissProgressDialog();
+                         }
+                         @Override
+                         public void onFailure(Call<CustomResponse> call, Throwable t) {
+                             Log.e("error_message", "onFailure: " + t.getMessage());
+                             dialog.dismissProgressDialog();
+                         }
+                     }
+
+        );
     }
 }
 

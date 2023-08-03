@@ -18,10 +18,10 @@ import retrofit2.Response;
 
 public class UserService {
     public static void getInfos() throws Exception{
-        String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGMzZjcxODU2ZDVjMzY2MTQ0YzI1MDMiLCJub20iOiJyYWtvdG8iLCJwcmVub20iOiJqZWFuIiwiZW1haWwiOiJyYWtvdG9AbWFkYXRvdXIuY29tIiwiaWF0IjoxNjkwOTk4MjAyLCJleHAiOjE2OTE2MDMwMDJ9.pGywT_TvlVZHm1aT9yqHkYC6U5GWPAmKfC5vGhFpVHM";
-        UserInterface userInterface = RetrofitClient.getRetrofitInstance(token).create(UserInterface.class);
+        String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGMzZjcxODU2ZDVjMzY2MTQ0YzI1MDMiLCJub20iOiJyYWtvdG8iLCJwcmVub20iOiJiZSIsImVtYWlsIjoicmFrb3RvQG1hZGF0b3VyLmNvbSIsImlhdCI6MTY5MDkyNjczOSwiZXhwIjoxNjkxNTMxNTM5fQ.VdC4_qJQe1NOCDAT_tEPW409hAbjb1F-HrmYNvizqkE";
+        UserInterface userInterface = RetrofitClient.getRetrofitInstance().create(UserInterface.class);
 
-        Call<CustomResponse> call = userInterface.getInfos();
+        Call<CustomResponse> call = userInterface.getInfos(new Token(token).getBearerToken());
         call.enqueue(new Callback<CustomResponse>() {
                          @Override
                          public void onResponse(Call<CustomResponse> call, Response<CustomResponse> response) {
@@ -88,14 +88,14 @@ public class UserService {
 
     public static void updateInfos() throws Exception{
         String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGNhMDcxNmQ0NjcwMzk0MDA0NzM3ODYiLCJub20iOiJNeW5vbSIsInByZW5vbSI6Ik15cHJlbm9tIiwiZW1haWwiOiJteWVtYWlsQGRvbWFpbi5jb20iLCJpYXQiOjE2OTA5NjE2ODYsImV4cCI6MTY5MTU2NjQ4Nn0.CvzlZqT376TzeaLB1HwKqQJMy5P_v01cAUw9vAwSrSw";
-        UserInterface userInterface = RetrofitClient.getRetrofitInstance(token).create(UserInterface.class);
+        UserInterface userInterface = RetrofitClient.getRetrofitInstance().create(UserInterface.class);
 
         InfosJson input = new InfosJson();
         input.setNom("Mynom3");
         input.setPrenom("Myprenom3");
         input.setEmail("myemail3@domain.com");
 
-        Call<CustomResponse> call = userInterface.updateInfos(input);
+        Call<CustomResponse> call = userInterface.updateInfos(new Token(token).getBearerToken(), input);
         call.enqueue(new Callback<CustomResponse>() {
                          @Override
                          public void onResponse(Call<CustomResponse> call, Response<CustomResponse> response) {
@@ -125,12 +125,12 @@ public class UserService {
 
     public static void updatePassword() throws Exception{
         String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGNhMDcxNmQ0NjcwMzk0MDA0NzM3ODYiLCJub20iOiJNeW5vbSIsInByZW5vbSI6Ik15cHJlbm9tIiwiZW1haWwiOiJteWVtYWlsQGRvbWFpbi5jb20iLCJpYXQiOjE2OTA5NjE2ODYsImV4cCI6MTY5MTU2NjQ4Nn0.CvzlZqT376TzeaLB1HwKqQJMy5P_v01cAUw9vAwSrSw";
-        UserInterface userInterface = RetrofitClient.getRetrofitInstance(token).create(UserInterface.class);
+        UserInterface userInterface = RetrofitClient.getRetrofitInstance().create(UserInterface.class);
 
         PasswordJson input = new PasswordJson();
         input.setPassword("000000");
 
-        Call<CustomResponse> call = userInterface.updatePassword(input);
+        Call<CustomResponse> call = userInterface.updatePassword(new Token(token).getBearerToken(), input);
         call.enqueue(new Callback<CustomResponse>() {
                          @Override
                          public void onResponse(Call<CustomResponse> call, Response<CustomResponse> response) {
