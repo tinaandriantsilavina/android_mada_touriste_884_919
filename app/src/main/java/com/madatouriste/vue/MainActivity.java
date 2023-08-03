@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 //            LieuService.getAll();
 //            LieuService.getByIdprovince();
 //            UserService.getInfos();
-            UserService.register();
+//            UserService.register();
 //            UserService.updateInfos();
 //            UserService.updatePassword();
 //            getUserInfo();
@@ -88,6 +88,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.clear();
             editor.apply();
+            HashMap map = new HashMap();
+            map.put("isConnected", false);
+            Utils.redirection(MainActivity.this, LoginActivity.class, map);
         }
         return val;
     }
@@ -112,11 +115,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
 
     public  void getUserInfo() throws Exception{
-        HashMap map = new HashMap();
-        map.put("isConnected", false);
-        Utils.redirection(MainActivity.this, LoginActivity.class, map);
+
         ProgressBuilder dialog  = new ProgressBuilder(this);
-        SharedPreferences sharedPreferences  = getSharedPreferences("auth", MODE_PRIVATE);
+        sharedPreferences  = getSharedPreferences("auth", MODE_PRIVATE);
         String token = sharedPreferences.getString("token", null);
         UserInterface userInterface = RetrofitClient.getRetrofitInstance().create(UserInterface.class);
 //

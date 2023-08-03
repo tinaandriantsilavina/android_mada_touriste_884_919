@@ -147,17 +147,16 @@ public class LoginActivity extends AppCompatActivity {
                                  SharedPreferences.Editor editor = sharedPreferences.edit();
                                  editor.putString("token", token.getToken());
                                  editor.apply();
-
                                  HashMap map = new HashMap();
                                  map .put("token", token.getToken());
                                  Utils.redirection(LoginActivity.this,MainActivity.class, map);
                              }else{
                                  Toast.makeText(LoginActivity.this, "Email et/ou Mot de passe  incorrecte ", Toast.LENGTH_SHORT).show();
                              }
-//                             Log.e("code", "onResponse: " + response.code() );
-//                             Log.e("message", "onResponse: message: " + response.body().getMessage() );
-//                             Log.e("raw_datas", "onResponse: message: " + response.body().getDatas() );
-//                             Log.e("token_object", "onResponse: message: " + token.getToken() );
+                             Log.e("code", "onResponse: " + response.code() );
+                             Log.e("message", "onResponse: message: " + response.body().getMessage() );
+                             Log.e("raw_datas", "onResponse: message: " + response.body().getDatas() );
+                             Log.e("token_object", "onResponse: message: " + token.getToken() );
                             spinner.dismissProgressDialog();
                          }
 
