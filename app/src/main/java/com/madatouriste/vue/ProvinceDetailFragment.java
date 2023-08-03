@@ -124,6 +124,10 @@ public class ProvinceDetailFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "Clic sur : lieu" , Toast.LENGTH_SHORT).show();
+                LieuListFragment lieuListFragment = new LieuListFragment();
+//                imageGallerieFragment.setImageObjects(province.getImages());
+                //imageGallerieFragment.setImageObjects(Utils.getImage());
+                Utils.fragmentNavig(getActivity(), lieuListFragment);
             }
         });
 
