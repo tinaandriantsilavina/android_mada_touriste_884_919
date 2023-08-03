@@ -131,7 +131,7 @@ public class ProvinceDetailFragment extends Fragment {
         btnPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                Utils.redirection(getActivity(), ImageGallerieActivity.class, new HashMap<>());
                 Toast.makeText(getActivity(), "Clic sur : Photo" , Toast.LENGTH_SHORT).show();
             }
         });

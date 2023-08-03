@@ -199,7 +199,7 @@ public  abstract class Utils {
     }
 
     public static ArrayList<String> getImage(){
-        String url ="http://192.168.56.1/";
+        String url ="http://192.168.56.1:3900/api/public/videos/";
         ArrayList<String> imageObjects = new ArrayList<String>();
         imageObjects.add( url+"01.png");
         imageObjects.add(url+"02.png");
