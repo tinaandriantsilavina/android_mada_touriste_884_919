@@ -152,7 +152,7 @@ public class ProvinceDetailFragment extends Fragment {
             public void onClick(View v) {
                 HashMap<String, Province> map = new HashMap<>();
 //                Utils.ecouteMenu(getActivity(), btnVideo, VideoActivity.class, map);
-                VideoFragment video = new VideoFragment();
+                VideoGallerieFragment video = new VideoGallerieFragment();
                 Utils.fragmentNavig(getActivity(), video);
                 Toast.makeText(getActivity(), "Clic sur : btnVideo" , Toast.LENGTH_SHORT).show();
             }
