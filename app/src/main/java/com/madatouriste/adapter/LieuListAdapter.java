@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.madatouriste.R;
 import com.madatouriste.modele.Lieu;
 import com.madatouriste.modele.Province;
@@ -35,9 +36,15 @@ public class LieuListAdapter extends ArrayAdapter<Lieu> {
         }
         ImageView listImage = view.findViewById(R.id.listImage);
         TextView listName = view.findViewById(R.id.listName);
+        RequestOptions requestOptions = new RequestOptions()
+                .placeholder(R.drawable.baseline_image_24)
+                .error(R.drawable.baseline_broken_image_24);
+
         Glide.with(getContext())
                 .load(province.getPdp())
-                .into(listImage);
+                .apply(requestOptions)
+                .into(listImage)
+        ;
 
         listName.setText(province.getNom());
         return view;

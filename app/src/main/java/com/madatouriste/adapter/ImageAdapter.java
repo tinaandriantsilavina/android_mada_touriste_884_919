@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.madatouriste.R;
 
 public class ImageAdapter extends BaseAdapter {
@@ -52,10 +53,13 @@ public class ImageAdapter extends BaseAdapter {
         } else {
             imageView = (ImageView) convertView;
         }
-
+        RequestOptions requestOptions = new RequestOptions()
+                .placeholder(R.drawable.baseline_image_24)
+                .error(R.drawable.baseline_broken_image_24);
         // Load the image from the URL using Glide
         Glide.with(mContext)
                 .load(mImageUrls.get(position))
+                .apply(requestOptions)
                 .into(imageView);
         return imageView;
     }

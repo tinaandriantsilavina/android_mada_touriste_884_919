@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.madatouriste.R;
 import com.madatouriste.adapter.ImageAdapter;
 import com.madatouriste.utils.Utils;
@@ -74,10 +75,13 @@ public class ImageGallerieFragment extends Fragment {
         String name = imageUrl.substring(imageUrl.lastIndexOf("/") + 1);
 
         Image_name.setText(name);
-
+        RequestOptions requestOptions = new RequestOptions()
+                .placeholder(R.drawable.baseline_image_24)
+                .error(R.drawable.baseline_broken_image_24);
         // Load the image from the URL using Glide
         Glide.with(this)
                 .load(imageUrl)
+                .apply(requestOptions)
                 .into(Image);
 
         btn_Close.setOnClickListener(new View.OnClickListener() {
