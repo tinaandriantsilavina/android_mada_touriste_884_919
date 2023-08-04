@@ -85,6 +85,9 @@ public class ProvinceDetailFragment extends Fragment {
             textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    WebViewFragment web = new WebViewFragment();
+                    web.setLien("http://www.google.com");
+                    Utils.fragmentNavig(getActivity(),web);
                     Toast.makeText(getActivity(), "Clic sur : " + element, Toast.LENGTH_SHORT).show();
                 }
             });

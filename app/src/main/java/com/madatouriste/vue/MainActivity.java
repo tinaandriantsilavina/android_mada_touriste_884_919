@@ -2,6 +2,8 @@ package com.madatouriste.vue;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -141,6 +143,17 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                          }
                      }
         );
+    }
+    @Override
+    public void onBackPressed() {;
+        Fragment fragment =  getSupportFragmentManager().findFragmentById(R.id.webContainer);
+        if(fragment instanceof  WebViewFragment){
+            WebViewFragment webViewFragment = (WebViewFragment)fragment;
+            if(webViewFragment.onBackPressed()){
+                return;
+            }
+        }
+        super.onBackPressed();
     }
 }
 
