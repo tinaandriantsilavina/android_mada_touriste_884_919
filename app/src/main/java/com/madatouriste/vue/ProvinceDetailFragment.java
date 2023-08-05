@@ -147,13 +147,9 @@ public class ProvinceDetailFragment extends Fragment {
         btnVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HashMap<String, Province> map = new HashMap<>();
-                ArrayList videoList = new ArrayList<>();
-                videoList.add("http://192.168.56.1:3900/api/public/videos/antananarivo_001.mp4");
-                videoList.add("http://192.168.56.1:3900/api/public/videos/toamasina_001.mp4");
                 VideoGallerieFragment video = new VideoGallerieFragment();
+                video.setVideoList(province.getVideos());
                 video.setLibele(province.getNom());
-                video.setVideoList(videoList);
                 Utils.fragmentNavig(getActivity(), video);
 //                Toast.makeText(getActivity(), "Clic sur : btnVideo" , Toast.LENGTH_SHORT).show();
             }

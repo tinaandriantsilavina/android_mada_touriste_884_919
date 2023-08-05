@@ -34,7 +34,6 @@ public class VideoFragment extends Fragment {
         View v =inflater.inflate(R.layout.fragment_video, container, false);
         view=v;
         startVideo(videoPath);
-        // Inflate the layout for this fragment
         return v;
     }
 

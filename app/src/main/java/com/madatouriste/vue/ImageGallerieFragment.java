@@ -50,7 +50,9 @@ public class ImageGallerieFragment extends Fragment {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                     String imageUrl = imageObjects.get(position);
-                    
+                    ImageFullScreenFragment im = new ImageFullScreenFragment();
+                    im.setImgPath(imageObjects.get(position));
+                    Utils.fragmentNavig(getActivity(), im);
 //                    showDialogBox(imageUrl);
                 }
 
@@ -67,7 +69,7 @@ public class ImageGallerieFragment extends Fragment {
 
         // Getting custom dialog views
         TextView Image_name = dialog.findViewById(R.id.txt_Image_name);
-        ImageView Image = dialog.findViewById(R.id.img);
+        ImageView image = dialog.findViewById(R.id.img);
         Button btn_Full = dialog.findViewById(R.id.btn_full);
         Button btn_Close = dialog.findViewById(R.id.btn_close);
 
@@ -78,11 +80,11 @@ public class ImageGallerieFragment extends Fragment {
         RequestOptions requestOptions = new RequestOptions()
                 .placeholder(R.drawable.baseline_image_24)
                 .error(R.drawable.baseline_broken_image_24);
-        // Load the image from the URL using Glide
+
         Glide.with(this)
                 .load(imageUrl)
                 .apply(requestOptions)
-                .into(Image);
+                .into(image);
 
         btn_Close.setOnClickListener(new View.OnClickListener() {
             @Override
