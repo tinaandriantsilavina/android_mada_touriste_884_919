@@ -3,7 +3,6 @@ package com.madatouriste.vue;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -13,13 +12,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.util.Util;
 import com.google.gson.Gson;
 import com.madatouriste.R;
 import com.madatouriste.modele.CustomResponse;
 import com.madatouriste.modele.Token;
 import com.madatouriste.service.RetrofitClient;
-import com.madatouriste.utils.ApiInterface.UserInterface;
+import com.madatouriste.ApiInterface.UserInterface;
 import com.madatouriste.utils.ProgressBuilder;
 import com.madatouriste.utils.Utils;
 import com.madatouriste.utils.template_json.RegisterJson;

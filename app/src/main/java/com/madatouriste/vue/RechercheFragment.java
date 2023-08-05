@@ -17,13 +17,12 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.madatouriste.R;
 import com.madatouriste.adapter.LieuListAdapter;
-import com.madatouriste.databinding.FragmentLieuListBinding;
 import com.madatouriste.databinding.FragmentRechercheBinding;
 import com.madatouriste.modele.CustomResponse;
 import com.madatouriste.modele.Lieu;
 import com.madatouriste.modele.Token;
 import com.madatouriste.service.RetrofitClient;
-import com.madatouriste.utils.ApiInterface.LieuInterface;
+import com.madatouriste.ApiInterface.LieuInterface;
 import com.madatouriste.utils.ProgressBuilder;
 import com.madatouriste.utils.Utils;
 

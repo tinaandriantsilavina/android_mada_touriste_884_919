@@ -6,7 +6,7 @@ import com.google.gson.Gson;
 import com.madatouriste.modele.CustomResponse;
 import com.madatouriste.modele.Token;
 import com.madatouriste.modele.User;
-import com.madatouriste.utils.ApiInterface.UserInterface;
+import com.madatouriste.ApiInterface.UserInterface;
 import com.madatouriste.utils.template_json.InfosJson;
 import com.madatouriste.utils.template_json.PasswordJson;
 import com.madatouriste.utils.template_json.RegisterJson;

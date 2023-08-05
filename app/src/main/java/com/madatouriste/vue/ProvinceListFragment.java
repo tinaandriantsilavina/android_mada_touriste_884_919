@@ -11,20 +11,15 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
-import com.bumptech.glide.util.Util;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.madatouriste.adapter.ProvinceAdapter;
-import com.madatouriste.constant.ProvinceConstant;
 import com.madatouriste.databinding.FragmentProvinceListBinding;
 import com.madatouriste.modele.CustomResponse;
 import com.madatouriste.modele.Province;
 import com.madatouriste.modele.Token;
 import com.madatouriste.service.RetrofitClient;
-import com.madatouriste.utils.ApiInterface.ProvinceInterface;
-import com.madatouriste.utils.ApiService;
+import com.madatouriste.ApiInterface.ProvinceInterface;
 import com.madatouriste.utils.ProgressBuilder;
 import com.madatouriste.utils.Utils;
 

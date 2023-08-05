@@ -1,15 +1,13 @@
 package com.madatouriste.service;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.madatouriste.modele.CustomResponse;
 import com.madatouriste.modele.Province;
 import com.madatouriste.modele.Token;
-import com.madatouriste.utils.ApiInterface.ProvinceInterface;
-import com.madatouriste.vue.LoginActivity;
+import com.madatouriste.ApiInterface.ProvinceInterface;
 
 import java.util.List;
 

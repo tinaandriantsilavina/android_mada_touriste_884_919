@@ -21,7 +21,7 @@ import com.madatouriste.modele.CustomResponse;
 import com.madatouriste.modele.Token;
 import com.madatouriste.modele.User;
 import com.madatouriste.service.RetrofitClient;
-import com.madatouriste.utils.ApiInterface.UserInterface;
+import com.madatouriste.ApiInterface.UserInterface;
 import com.madatouriste.utils.ProgressBuilder;
 import com.madatouriste.utils.Utils;
 import com.madatouriste.utils.template_json.InfosJson;

@@ -14,26 +14,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
 import com.madatouriste.R;
 import com.madatouriste.modele.CustomResponse;
 import com.madatouriste.modele.Token;
 import com.madatouriste.service.RetrofitClient;
-import com.madatouriste.utils.ApiInterface.AuthInterface;
-import com.madatouriste.utils.ApiService;
+import com.madatouriste.ApiInterface.AuthInterface;
 import com.madatouriste.utils.ProgressBuilder;
 import com.madatouriste.utils.Utils;
 import com.madatouriste.utils.template_json.LoginJson;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.util.HashMap;
 
-import cz.msebera.android.httpclient.Header;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

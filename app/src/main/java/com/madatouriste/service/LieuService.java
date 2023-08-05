@@ -7,7 +7,7 @@ import com.google.gson.reflect.TypeToken;
 import com.madatouriste.modele.CustomResponse;
 import com.madatouriste.modele.Lieu;
 import com.madatouriste.modele.Token;
-import com.madatouriste.utils.ApiInterface.LieuInterface;
+import com.madatouriste.ApiInterface.LieuInterface;
 
 import java.io.Serializable;
 import java.util.List;

@@ -5,7 +5,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.madatouriste.modele.CustomResponse;
 import com.madatouriste.modele.Token;
-import com.madatouriste.utils.ApiInterface.AuthInterface;
+import com.madatouriste.ApiInterface.AuthInterface;
 import com.madatouriste.utils.template_json.LoginJson;
 
 import retrofit2.Call;

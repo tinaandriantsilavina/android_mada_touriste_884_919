@@ -1,4 +1,4 @@
-package com.madatouriste.utils.ApiInterface;
+package com.madatouriste.ApiInterface;
 
 import com.madatouriste.modele.CustomResponse;
 
