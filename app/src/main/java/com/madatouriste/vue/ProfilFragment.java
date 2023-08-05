@@ -45,7 +45,6 @@ public class ProfilFragment extends Fragment {
     public ProfilFragment(){
         // require a empty public constructor
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_profil, container, false);
@@ -56,7 +55,6 @@ public class ProfilFragment extends Fragment {
         actionBtnPassword(v);
         actionBtnModifier();
         actionBtnModifierPass();
-        Utils.sendNotif1(getContext(), "Modification terminé","fkgjldkg");
         return v ;
     }
 
@@ -89,7 +87,6 @@ public class ProfilFragment extends Fragment {
         ((EditText)v.findViewById(R.id.profil_txt_nom)).setText(user.getNom());
         ((EditText)v.findViewById(R.id.profil_txt_prenom)).setText(user.getPrenom());
         ((EditText)v.findViewById(R.id.profil_txt_email)).setText(user.getEmail());
-//        ((EditText)v.findViewById(R.id.profil_txt_password)).setText(user.getPassword());
     }
     public void actionBtnPassword(View v){
         passwordIcon.setOnClickListener(new View.OnClickListener(){
@@ -149,11 +146,9 @@ public class ProfilFragment extends Fragment {
             }
         });
     }
-
     public void setUser(User user) {
         this.user = user;
     }
-
     public void updateInfos(String nom, String prenom, String email) throws Exception{
         ProgressBuilder spinner = new ProgressBuilder(getActivity());
         spinner.showProgressDialog();
@@ -163,7 +158,6 @@ public class ProfilFragment extends Fragment {
         input.setNom(nom);
         input.setPrenom(prenom);
         input.setEmail(email);
-
         Call<CustomResponse> call = userInterface.updateInfos(new Token(token).getBearerToken(), input);
         call.enqueue(new Callback<CustomResponse>() {
                          @Override
@@ -191,14 +185,11 @@ public class ProfilFragment extends Fragment {
                              spinner.dismissProgressDialog();
                          }
                      }
-
         );
     }
-
     public void updatePassword(String mdp) throws Exception{
         String token = Utils.getToken(getActivity());
         UserInterface userInterface = RetrofitClient.getRetrofitInstance().create(UserInterface.class);
-
         PasswordJson input = new PasswordJson();
         input.setPassword(mdp);
 
@@ -222,14 +213,12 @@ public class ProfilFragment extends Fragment {
                                          Toast.makeText(getActivity(), "Erreur :"+response.message(), Toast.LENGTH_SHORT).show();
                              }
                          }
-
                          @Override
                          public void onFailure(Call<CustomResponse> call, Throwable t) {
                              Log.e("error_message", "onFailure: " + t.getMessage());
                              Toast.makeText(getActivity(), "Erreur WS:: "+ t.getMessage(), Toast.LENGTH_SHORT).show();
                          }
                      }
-
         );
     }
 }

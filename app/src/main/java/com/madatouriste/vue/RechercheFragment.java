@@ -48,11 +48,11 @@ public class RechercheFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         try {
-            getAll();
-            View v =inflater.inflate(R.layout.fragment_recherche, container, false);
+            getAll("");
+//            View v =inflater.inflate(R.layout.fragment_recherche, container, false);
             binding = FragmentRechercheBinding.inflate(inflater, container, false);
-            recherche_motCle = v.findViewById(R.id.recherche_motCle);
-            recherche_btn =  v.findViewById(R.id.recherche_btn);
+            recherche_motCle = binding.rechercheMotCle;//.findViewById(R.id.recherche_motCle);
+            recherche_btn =  binding.rechercheBtn;//.findViewById(R.id.recherche_btn);
             actionBtnRecherche();
             return binding.getRoot() ;
         } catch (Exception e) {
@@ -65,7 +65,12 @@ public class RechercheFragment extends Fragment {
         recherche_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String motCle = String.valueOf(recherche_motCle.getText());
+                try {
+                    String motCle = String.valueOf(recherche_motCle.getText()).trim();
+                    getAll(motCle);
+                } catch (Exception e) {
+                    Toast.makeText(getActivity(), "Erreur ", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -85,12 +90,12 @@ public class RechercheFragment extends Fragment {
         });
     }
 
-    public  void getAll() throws Exception {
+    public  void getAll(String search_query ) throws Exception {
         ProgressBuilder spinner = new ProgressBuilder(getActivity());
         spinner.showProgressDialog();
         String token= Utils.getToken(getActivity());
         LieuInterface lieuInterface = RetrofitClient.getRetrofitInstance().create(LieuInterface.class);
-        String search_query = "";
+//        String search_query = "";
         Call<CustomResponse> call = lieuInterface.getAllLieu(new Token(token).getBearerToken(), search_query);
         call.enqueue(new Callback<CustomResponse>() {
                          @Override
