@@ -50,8 +50,8 @@ public class LieuListFragment extends Fragment {
         binding = FragmentLieuListBinding.inflate(inflater, container, false);
         try {
             if(idProvince!=null && !idProvince.isEmpty()){
-//                getByIdprovince();
-                getAll();
+                getByIdprovince();
+//                getAll();
             }else{
                 getAll();
             }
@@ -127,7 +127,9 @@ public class LieuListFragment extends Fragment {
                              public void onResponse(Call<CustomResponse> call, Response<CustomResponse> response) {
                                  if (response.body().getStatus() == 200) {
                                      String jsonString = new Gson().toJson(response.body().getDatas());
-                                     lieuList = new Gson().fromJson(jsonString, new TypeToken<List<Lieu>>(){}.getType());
+                                     lieuList = new Gson().fromJson(jsonString, new TypeToken<List<Lieu>>() {
+                                     }.getType());
+                                     initList();
                                      Utils.logger(response);
                                  } else {
                                      Utils.logger(response);
@@ -135,7 +137,6 @@ public class LieuListFragment extends Fragment {
                                  }
                                  spinner.dismissProgressDialog();
                              }
-
                              @Override
                              public void onFailure(Call<CustomResponse> call, Throwable t) {
                                  Log.e("error_message", "onFailure: " + t.getMessage());

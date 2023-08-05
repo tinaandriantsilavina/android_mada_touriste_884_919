@@ -66,6 +66,13 @@ public class ProfilFragment extends Fragment {
             MainActivity mainActivity = (MainActivity) getActivity();
             String nom = mainActivity.getUser().getNom();
             user = mainActivity.getUser();
+            if(user==null){
+                try {
+                    mainActivity.getUserInfo();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
         }else{
             Toast.makeText(getActivity(), "Veuillez vous connecter", Toast.LENGTH_SHORT).show();
         }
