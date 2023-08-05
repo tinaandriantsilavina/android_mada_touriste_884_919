@@ -17,37 +17,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class UserService {
-    public static void getInfos() throws Exception{
-        String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGMzZjcxODU2ZDVjMzY2MTQ0YzI1MDMiLCJub20iOiJyYWtvdG8iLCJwcmVub20iOiJiZSIsImVtYWlsIjoicmFrb3RvQG1hZGF0b3VyLmNvbSIsImlhdCI6MTY5MDkyNjczOSwiZXhwIjoxNjkxNTMxNTM5fQ.VdC4_qJQe1NOCDAT_tEPW409hAbjb1F-HrmYNvizqkE";
-        UserInterface userInterface = RetrofitClient.getRetrofitInstance().create(UserInterface.class);
-
-        Call<CustomResponse> call = userInterface.getInfos(new Token(token).getBearerToken());
-        call.enqueue(new Callback<CustomResponse>() {
-                         @Override
-                         public void onResponse(Call<CustomResponse> call, Response<CustomResponse> response) {
-                             if (response.body().getStatus() == 200) {
-                                 String jsonString = new Gson().toJson(response.body().getDatas());
-                                 User user = new Gson().fromJson(jsonString, User.class);
-                                 Log.e("code", "onResponse: " + response.code() );
-                                 Log.e("status", "onResponse: " + response.body().getStatus());
-                                 Log.e("message", "onResponse: message: " + response.body().getMessage() );
-                                 Log.e("raw_datas", "onResponse: message: " + response.body().getDatas() );
-                                 Log.e("object_data", "onResponse: message: " + user );
-                             } else {
-                                 Log.e("code", "onResponse: " + response.code());
-                                 Log.e("status", "onResponse: " + response.body().getStatus());
-                                 Log.e("message", "onResponse: message: " + response.body().getMessage());
-                             }
-                         }
-
-                         @Override
-                         public void onFailure(Call<CustomResponse> call, Throwable t) {
-                             Log.e("error_message", "onFailure: " + t.getMessage());
-                         }
-                     }
-
-        );
-    }
 
     public static void register() throws Exception{
         UserInterface userInterface = RetrofitClient.getRetrofitInstance().create(UserInterface.class);
@@ -70,6 +39,39 @@ public class UserService {
                                  Log.e("message", "onResponse: message: " + response.body().getMessage() );
                                  Log.e("raw_datas", "onResponse: message: " + response.body().getDatas() );
                                  Log.e("object_data", "onResponse: message: " + token );
+                             } else {
+                                 Log.e("code", "onResponse: " + response.code());
+                                 Log.e("status", "onResponse: " + response.body().getStatus());
+                                 Log.e("message", "onResponse: message: " + response.body().getMessage());
+                             }
+                         }
+
+                         @Override
+                         public void onFailure(Call<CustomResponse> call, Throwable t) {
+                             Log.e("error_message", "onFailure: " + t.getMessage());
+                         }
+                     }
+
+        );
+    }
+
+
+    public static void getInfos() throws Exception{
+        String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGMzZjcxODU2ZDVjMzY2MTQ0YzI1MDMiLCJub20iOiJyYWtvdG8iLCJwcmVub20iOiJiZSIsImVtYWlsIjoicmFrb3RvQG1hZGF0b3VyLmNvbSIsImlhdCI6MTY5MDkyNjczOSwiZXhwIjoxNjkxNTMxNTM5fQ.VdC4_qJQe1NOCDAT_tEPW409hAbjb1F-HrmYNvizqkE";
+        UserInterface userInterface = RetrofitClient.getRetrofitInstance().create(UserInterface.class);
+
+        Call<CustomResponse> call = userInterface.getInfos(new Token(token).getBearerToken());
+        call.enqueue(new Callback<CustomResponse>() {
+                         @Override
+                         public void onResponse(Call<CustomResponse> call, Response<CustomResponse> response) {
+                             if (response.body().getStatus() == 200) {
+                                 String jsonString = new Gson().toJson(response.body().getDatas());
+                                 User user = new Gson().fromJson(jsonString, User.class);
+                                 Log.e("code", "onResponse: " + response.code() );
+                                 Log.e("status", "onResponse: " + response.body().getStatus());
+                                 Log.e("message", "onResponse: message: " + response.body().getMessage() );
+                                 Log.e("raw_datas", "onResponse: message: " + response.body().getDatas() );
+                                 Log.e("object_data", "onResponse: message: " + user );
                              } else {
                                  Log.e("code", "onResponse: " + response.code());
                                  Log.e("status", "onResponse: " + response.body().getStatus());

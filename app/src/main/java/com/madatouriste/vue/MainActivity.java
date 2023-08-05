@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         }else if(((Integer)item.getItemId()).equals(R.id.profil)){
             val =  Utils.fragmentNavig(this, profilFragment);
         }else if(((Integer)item.getItemId()).equals(R.id.logout)){
-            Toast.makeText(this, "Deconnexion", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Deconnexion", Toast.LENGTH_SHORT).show();
             Utils.clearToken(MainActivity.this);
             HashMap map = new HashMap();
             map.put("isConnected", false);
@@ -125,6 +125,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                                  User u = new Gson().fromJson(jsonString, User.class);
                                  user = u;
                                  Utils.logger(response);
+                                 profilFragment.setUser(u);
                                  initBottomMenu();
                              } else {
                                  Utils.logger(response);
@@ -154,6 +155,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             }
         }
         super.onBackPressed();
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
 

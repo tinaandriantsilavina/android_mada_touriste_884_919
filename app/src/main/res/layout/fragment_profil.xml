@@ -19,9 +19,6 @@
             android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:textStyle="bold" />
-
-
-
     </RelativeLayout>
     <ScrollView
         android:layout_width="match_parent"
@@ -54,7 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/round_back_white"
                 android:hint="Nom"
@@ -102,7 +99,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp"
-                android:background="@drawable/round_back_private_account"
+                android:background="@drawable/ripple_effect_raised_jaune"
                 android:paddingStart="40dp"
                 android:paddingEnd="40dp"
                 android:text="Modifier profil"
@@ -145,6 +142,7 @@
     </ScrollView>
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/profil_btn_modifier_pass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

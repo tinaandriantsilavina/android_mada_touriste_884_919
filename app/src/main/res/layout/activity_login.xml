@@ -97,7 +97,7 @@
         android:text="Connexion"
         android:textAllCaps="false"
         android:layout_marginTop="40dp"
-        android:background="@drawable/round_back_primary"
+        android:background="@drawable/ripple_effect_raised_vert"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         />
@@ -146,17 +146,17 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:background="@drawable/round_back_dark_blue5_15"
+        android:background="@drawable/ripple_effect_raised_gris"
         android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp">
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="20dp"
-            android:adjustViewBounds="true"
-            android:src="@drawable/logout_icon"/>
+<!--        <ImageView-->
+<!--            android:layout_width="20dp"-->
+<!--            android:layout_height="20dp"-->
+<!--            android:layout_centerVertical="true"-->
+<!--            android:layout_marginStart="20dp"-->
+<!--            android:adjustViewBounds="true"-->
+<!--            android:src="@drawable/logout_icon"/>-->
 
         <TextView
             android:id="@+id/btnInscription"
