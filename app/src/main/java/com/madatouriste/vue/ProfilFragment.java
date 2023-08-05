@@ -136,6 +136,15 @@ public class ProfilFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 String password = String.valueOf(profil_txt_password.getText());
+                if(password.isEmpty()){
+                    Toast.makeText(getActivity(), "Veuillez bien remplir les formulaire de mot de passe", Toast.LENGTH_SHORT).show();
+                }else{
+                    try {
+                        updatePassword(password);
+                    } catch (Exception e) {
+                        Toast.makeText(getActivity(), "Erreur :"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
 
             }
         });

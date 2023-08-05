@@ -101,7 +101,7 @@ public class LieuDetailFragment extends Fragment {
                 imageGallerieFragment.setImageObjects(lieu.getImages());
 //                //imageGallerieFragment.setImageObjects(Utils.getImage());
                 Utils.fragmentNavig(getActivity(), imageGallerieFragment);
-                Toast.makeText(getActivity(), "Clic sur : Photo Lieu" , Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "Clic sur : Photo Lieu" , Toast.LENGTH_SHORT).show();
             }
         });
     }

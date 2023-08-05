@@ -220,7 +220,7 @@ public  abstract class Utils {
     public static void sendNotif1(Context context,String title, String message) {
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
         Notification notification = new NotificationCompat.Builder(context, App.CHANNEL_1_ID)
-                .setSmallIcon(R.drawable.logout_icon)
+                .setSmallIcon(R.drawable.logo)
                 .setContentTitle(title)
                 .setContentText(message)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
@@ -236,7 +236,7 @@ public  abstract class Utils {
     public static void sendNotif2(Context context,String title, String message) {
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
         Notification notification = new NotificationCompat.Builder(context, App.CHANNEL_2_ID)
-                .setSmallIcon(R.drawable.logout_icon)
+                .setSmallIcon(R.drawable.logo)
                 .setContentTitle(title)
                 .setContentText(message)
                 .setPriority(NotificationCompat.PRIORITY_LOW)
