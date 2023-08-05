@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background ="@color/primary"
+    android:background ="@color/vert"
     tools:context=".vue.MainActivity">
 
     <RelativeLayout
@@ -54,7 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="0dp"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/round_back_white"
                 android:hint="Nom"
@@ -69,7 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/round_back_white"
                 android:hint="Prenom"
@@ -84,7 +84,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/round_back_white"
                 android:hint="Email"
@@ -94,6 +94,19 @@
                 android:paddingEnd="20dp"
                 android:textSize="16sp" />
 
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/profil_btn_modifier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/round_back_private_account"
+                android:paddingStart="40dp"
+                android:paddingEnd="40dp"
+                android:text="Modifier profil"
+                android:textColor="@color/white" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -122,24 +135,24 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:padding="10dp"
-                    android:src="@drawable/logout_icon"
+                    android:src="@drawable/baseline_remove_red_eye_24"
                     android:adjustViewBounds="true"
                     android:layout_marginEnd="20dp"
                     />
             </RelativeLayout>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/profil_btn_modifier"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="100dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="50dp"
-                android:background="@drawable/round_back_secondary_100"
-                android:paddingStart="40dp"
-                android:paddingEnd="40dp"
-                android:text="Modifier profil"
-                android:textColor="@color/primary" />
         </LinearLayout>
     </ScrollView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/ripple_effect_raised_bleu"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        android:text="Modifier mot de passe"
+        android:textColor="@color/white" />
 </LinearLayout>
