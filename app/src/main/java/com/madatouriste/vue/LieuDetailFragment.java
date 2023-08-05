@@ -96,10 +96,11 @@ public class LieuDetailFragment extends Fragment {
         btnPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                ImageGallerieFragment imageGallerieFragment = new ImageGallerieFragment();
-//                imageGallerieFragment.setImageObjects(lieu.getImages());
+//                Image
+                ImageGallerieFragment imageGallerieFragment = new ImageGallerieFragment();
+                imageGallerieFragment.setImageObjects(lieu.getImages());
 //                //imageGallerieFragment.setImageObjects(Utils.getImage());
-//                Utils.fragmentNavig(getActivity(), imageGallerieFragment);
+                Utils.fragmentNavig(getActivity(), imageGallerieFragment);
                 Toast.makeText(getActivity(), "Clic sur : Photo Lieu" , Toast.LENGTH_SHORT).show();
             }
         });

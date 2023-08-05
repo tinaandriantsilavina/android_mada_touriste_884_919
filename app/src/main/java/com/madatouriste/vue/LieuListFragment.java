@@ -53,7 +53,8 @@ public class LieuListFragment extends Fragment {
         binding = FragmentLieuListBinding.inflate(inflater, container, false);
         try {
             if(idProvince!=null && !idProvince.isEmpty()){
-                getByIdprovince();
+//                getByIdprovince();
+                getAll();
             }else{
                 getAll();
             }
@@ -151,5 +152,19 @@ public class LieuListFragment extends Fragment {
         }
     }
 
+    public List<Lieu> getLieuList() {
+        return lieuList;
+    }
 
+    public void setLieuList(List<Lieu> lieuList) {
+        this.lieuList = lieuList;
+    }
+
+    public String getIdProvince() {
+        return idProvince;
+    }
+
+    public void setIdProvince(String idProvince) {
+        this.idProvince = idProvince;
+    }
 }

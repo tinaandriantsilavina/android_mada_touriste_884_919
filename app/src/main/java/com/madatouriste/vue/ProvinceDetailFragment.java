@@ -126,8 +126,9 @@ public class ProvinceDetailFragment extends Fragment {
         btnLieu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Clic sur : lieu" , Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "Clic sur : lieu" , Toast.LENGTH_SHORT).show();
                 LieuListFragment lieuListFragment = new LieuListFragment();
+                lieuListFragment.setIdProvince(province.get_id());
                 Utils.fragmentNavig(getActivity(), lieuListFragment);
             }
         });
