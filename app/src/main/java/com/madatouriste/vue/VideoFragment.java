@@ -19,6 +19,7 @@ import com.madatouriste.utils.ProgressBuilder;
 public class VideoFragment extends Fragment {
     VideoView simpleVideoView;
     MediaController mediaControls;
+    String videoPath;
     View view ;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,7 +33,6 @@ public class VideoFragment extends Fragment {
 
         View v =inflater.inflate(R.layout.fragment_video, container, false);
         view=v;
-        String videoPath = "http://192.168.56.1:3900/api/public/videos/antananarivo_001.mp4";
         startVideo(videoPath);
         // Inflate the layout for this fragment
         return v;
@@ -88,5 +88,9 @@ public class VideoFragment extends Fragment {
 //        }
 //        return false;
         return true;
+    }
+
+    public void setVideoPath(String videoPath) {
+        this.videoPath = videoPath;
     }
 }

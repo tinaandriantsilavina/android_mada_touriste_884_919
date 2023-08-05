@@ -50,8 +50,8 @@ public class ImageGallerieFragment extends Fragment {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                     String imageUrl = imageObjects.get(position);
-
-                    showDialogBox(imageUrl);
+                    
+//                    showDialogBox(imageUrl);
                 }
 
             });

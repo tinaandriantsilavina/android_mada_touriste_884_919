@@ -7,11 +7,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.madatouriste.R;
 import com.madatouriste.adapter.VideoListAdapter;
 import com.madatouriste.modele.VideoModel;
+import com.madatouriste.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +21,9 @@ import java.util.List;
 public class VideoGallerieFragment extends Fragment {
     private ListView listView;
     private VideoListAdapter adapter;
-    private List<VideoModel> videoList;
+    private List<String> videoList;
+
+    private String libele ="";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,27 +32,35 @@ public class VideoGallerieFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_video_gallerie, container, false);
         listView = v.findViewById(R.id.listView);
-        videoList = new ArrayList<>();
-
-        // Ajoutez les URL de vos vidéos à la liste videoList
-        videoList.add(new VideoModel("http://192.168.56.1:3900/api/public/videos/antananarivo_001.mp4"));
-        videoList.add(new VideoModel("http://192.168.56.1:3900/api/public/videos/antananarivo_001.mp4"));
-        // ...
-
-        adapter = new VideoListAdapter(getActivity(), videoList);
+        adapter = new VideoListAdapter(getActivity(), libele, videoList);
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                VideoFragment video = new VideoFragment();
+                video.setVideoPath(videoList.get(position));
+                Utils.fragmentNavig(getActivity(),video);
+            }
+
+        });
         return v;
     }
 
-    public List<VideoModel> getVideoList() {
+    public List<String> getVideoList() {
         return videoList;
     }
 
-    public void setVideoList(List<VideoModel> videoList) {
+    public void setVideoList(List<String> videoList) {
         this.videoList = videoList;
+    }
+
+    public String getLibele() {
+        return libele;
+    }
+
+    public void setLibele(String libele) {
+        this.libele = libele;
     }
 }

@@ -10,6 +10,7 @@ import com.madatouriste.R;
 public class ImageFullViewActivity extends AppCompatActivity {
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -17,6 +17,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.madatouriste.R;
 import com.madatouriste.constant.ProvinceConstant;
 import com.madatouriste.modele.Province;
+import com.madatouriste.modele.VideoModel;
 import com.madatouriste.utils.Utils;
 
 import java.util.ArrayList;
@@ -110,7 +111,6 @@ public class ProvinceDetailFragment extends Fragment {
             textView.setTextSize(14);
             textView.setPadding(40, 20, 20, 20);
             textView.setTextColor(Color.parseColor("#c30097"));
-//          textView.setBackgroundColor(Color.LTGRAY);
             textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -128,8 +128,6 @@ public class ProvinceDetailFragment extends Fragment {
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "Clic sur : lieu" , Toast.LENGTH_SHORT).show();
                 LieuListFragment lieuListFragment = new LieuListFragment();
-//                imageGallerieFragment.setImageObjects(province.getImages());
-                //imageGallerieFragment.setImageObjects(Utils.getImage());
                 Utils.fragmentNavig(getActivity(), lieuListFragment);
             }
         });
@@ -140,9 +138,8 @@ public class ProvinceDetailFragment extends Fragment {
             public void onClick(View v) {
                 ImageGallerieFragment imageGallerieFragment = new ImageGallerieFragment();
                 imageGallerieFragment.setImageObjects(province.getImages());
-                //imageGallerieFragment.setImageObjects(Utils.getImage());
                 Utils.fragmentNavig(getActivity(), imageGallerieFragment);
-                Toast.makeText(getActivity(), "Clic sur : Photo" , Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "Clic sur : Photo" , Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -151,10 +148,14 @@ public class ProvinceDetailFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 HashMap<String, Province> map = new HashMap<>();
-//                Utils.ecouteMenu(getActivity(), btnVideo, VideoActivity.class, map);
+                ArrayList videoList = new ArrayList<>();
+                videoList.add("http://192.168.56.1:3900/api/public/videos/antananarivo_001.mp4");
+                videoList.add("http://192.168.56.1:3900/api/public/videos/toamasina_001.mp4");
                 VideoGallerieFragment video = new VideoGallerieFragment();
+                video.setLibele(province.getNom());
+                video.setVideoList(videoList);
                 Utils.fragmentNavig(getActivity(), video);
-                Toast.makeText(getActivity(), "Clic sur : btnVideo" , Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "Clic sur : btnVideo" , Toast.LENGTH_SHORT).show();
             }
         });
     }
