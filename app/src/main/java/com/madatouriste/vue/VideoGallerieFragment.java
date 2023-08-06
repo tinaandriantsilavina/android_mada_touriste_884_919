@@ -39,7 +39,7 @@ public class VideoGallerieFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                VideoFragment video = new VideoFragment();
+                ExoPlayerFragment video = new ExoPlayerFragment();
                 video.setVideoPath(videoList.get(position));
                 Utils.fragmentNavig(getActivity(),video);
             }

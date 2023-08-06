@@ -3,6 +3,7 @@ package com.madatouriste.vue;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     RechercheFragment rechercheFragment = new RechercheFragment();
     ProfilFragment profilFragment = new ProfilFragment();
 
-
+    private SwipeRefreshLayout swipeRefreshLayout;
     BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -43,17 +44,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         try {
-//            AuthService.login();
-//            ProvinceService.getAll();
-//            ProvinceService.getById();
-//            LieuService.getAll();
-//            LieuService.getByIdprovince();
-//            UserService.getInfos();
-//            UserService.register();
-//            UserService.updateInfos();
-//            UserService.updatePassword();
-//            getUserInfo();
+            initRefresh();
             getUserInfo();
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -78,7 +71,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         }else if(((Integer)item.getItemId()).equals(R.id.profil)){
             val =  Utils.fragmentNavig(this, profilFragment);
         }else if(((Integer)item.getItemId()).equals(R.id.logout)){
-//            Toast.makeText(this, "Deconnexion", Toast.LENGTH_SHORT).show();
             Utils.clearToken(MainActivity.this);
             HashMap map = new HashMap();
             map.put("isConnected", false);
@@ -155,6 +147,17 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public void initRefresh(){
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 }
 

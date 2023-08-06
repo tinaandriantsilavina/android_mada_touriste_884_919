@@ -16,7 +16,7 @@ import android.widget.VideoView;
 import com.madatouriste.R;
 import com.madatouriste.utils.ProgressBuilder;
 
-public class VideoFragment extends Fragment {
+public class VideoFragment extends Fragment implements MediaPlayer.OnPreparedListener {
     VideoView simpleVideoView;
     MediaController mediaControls;
     String videoPath;
@@ -37,7 +37,7 @@ public class VideoFragment extends Fragment {
         return v;
     }
 
-    private void startVideo(String videoPath){
+    private void startVideo(String videoPath) {
         simpleVideoView = (VideoView) view.findViewById(R.id.simpleVideoView);
         ProgressBuilder dialog  = new ProgressBuilder(getActivity());
         dialog.showProgressDialog();
@@ -50,28 +50,31 @@ public class VideoFragment extends Fragment {
             // set the media controller for video view
             simpleVideoView.setMediaController(mediaControls);
             // set the uri for the video view
-
             simpleVideoView.setVideoURI(Uri.parse(videoPath));
-            simpleVideoView.setOnErrorListener((mp,what,extra)->{
-                Toast.makeText(getActivity(),"Erreur lors de la chargement de la video ", Toast.LENGTH_SHORT).show();
+            simpleVideoView.setOnErrorListener((mp, what, extra) -> {
+                Toast.makeText(getActivity(), "Erreur lors du chargement de la vidéo", Toast.LENGTH_SHORT).show();
                 dialog.dismissProgressDialog();
                 return true;
             });
-            // start a video
-            simpleVideoView.start();
-            dialog.dismissProgressDialog();
+            // register OnPreparedListener to start video once it's ready
+            simpleVideoView.setOnPreparedListener(this);
             // implement on completion listener on video view
             simpleVideoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mp) {
-                    Toast.makeText(getActivity(), "Thank You...!!!", Toast.LENGTH_LONG).show(); // display a toast when an video is completed
+                    Toast.makeText(getActivity(), "Thank You...!!!", Toast.LENGTH_LONG).show(); // display a toast when a video is completed
                 }
             });
         } else {
             Toast.makeText(getActivity(), "Le serveur est hors ligne, veuillez démarrer XAMPP", Toast.LENGTH_SHORT).show();
             dialog.dismissProgressDialog();
         }
+    }
 
+    @Override
+    public void onPrepared(MediaPlayer mp) {
+        // The video is ready, you can start it here
+        simpleVideoView.start();
     }
 
 
@@ -92,4 +95,5 @@ public class VideoFragment extends Fragment {
     public void setVideoPath(String videoPath) {
         this.videoPath = videoPath;
     }
+
 }
