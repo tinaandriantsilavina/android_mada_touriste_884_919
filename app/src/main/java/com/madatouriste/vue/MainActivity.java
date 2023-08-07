@@ -4,8 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
+import androidx.core.splashscreen.SplashScreen;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -28,7 +29,8 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView
         .OnNavigationItemSelectedListener   {
-
+    private boolean keep = true;
+    private final int DELAY = 5000;
     public User user;
     private  boolean  isConnected = false;
     private String token;
@@ -41,7 +43,16 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
         super.onCreate(savedInstanceState);
+        splashScreen.setKeepOnScreenCondition(new SplashScreen.KeepOnScreenCondition() {
+            @Override
+            public boolean shouldKeepOnScreen() {
+                return keep;
+            }
+        });
+        Handler handler = new Handler();
+        handler.postDelayed(runner, DELAY);
         setContentView(R.layout.activity_main);
         try {
             initRefresh();
@@ -159,5 +170,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             }
         });
     }
+    private final Runnable runner = new Runnable() {
+        @Override
+        public void run() {
+            keep = false;
+        }
+    };
+
 }
 
