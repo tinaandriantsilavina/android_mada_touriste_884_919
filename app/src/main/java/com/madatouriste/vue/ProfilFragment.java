@@ -175,7 +175,8 @@ public class ProfilFragment extends Fragment {
                                  ((MainActivity) getActivity()).setUser(user);
                                  Utils.logger(response);
                                  String str = "Votre modification à ete realiser avec success :\nNom: %s \n Prenom: %s \n EMail: %s";
-                                 Utils.sendNotif1(getContext(), "Modification terminé", String.format(str, nom, prenom, email));
+//                                 String.format(str, nom, prenom, email)
+                                 Utils.sendNotif1(getContext(), "Securité\n", "Les informations de votre compte ont été modifié." );
                                  ProfilFragment profil = new ProfilFragment();
                                  profil.setUser(user);
                                  Utils.fragmentNavig(getActivity(), profil);
@@ -210,7 +211,8 @@ public class ProfilFragment extends Fragment {
                                  ((MainActivity) getActivity()).setUser(user);
                                  Utils.logger(response);
                                  String str = "La modification de votre mot de passe  à ete realiser avec success \nNouveau mot de passe: %s ";
-                                 Utils.sendNotif2(getActivity(), "Modification terminé", String.format(str, mdp));
+//                                 Utils.sendNotif2(getActivity(), "Modification terminé", String.format(str, mdp));
+
                                  ProfilFragment profil = new ProfilFragment();
                                  profil.setUser(user);
                                  Utils.fragmentNavig(getActivity(), profil);
