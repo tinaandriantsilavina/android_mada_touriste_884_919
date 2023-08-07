@@ -15,7 +15,7 @@ tools:context=".vue.ImageFullViewActivity">
         android:layout_height="wrap_content"
         android:layout_alignParentStart="false"
         android:scaleType="fitStart"
-        android:src="@drawable/pdc"
+        android:src="@drawable/back1"
         />
 </LinearLayout>
 <TextView
@@ -26,14 +26,19 @@ tools:context=".vue.ImageFullViewActivity">
     android:textSize="25sp"
     android:layout_marginStart="25dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"/>
+    android:layout_height="wrap_content"
+    android:shadowColor="#80000000"
+    android:shadowDx="8"
+    android:shadowDy="8"
+    android:shadowRadius="4"
+    />
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_marginTop="150dp"
     android:padding="10dp"
-    android:background="@drawable/rounded_header_background">
+    android:background="@drawable/rounded_header_background2">
 
     <ListView
         android:layout_width="match_parent"
@@ -47,56 +52,3 @@ tools:context=".vue.ImageFullViewActivity">
         android:dividerHeight="10.0sp"/>
 </LinearLayout>
 </RelativeLayout>
-
-
-
-<!--    <?xml version="1.0" encoding="utf-8"?>-->
-<!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--xmlns:tools="http://schemas.android.com/tools"-->
-<!--android:layout_width="match_parent"-->
-<!--android:layout_height="match_parent"-->
-<!--android:background="@drawable/bannier_list_province"-->
-<!--tools:context=".vue.MainActivity">-->
-
-<!--<LinearLayout-->
-<!--    android:orientation="vertical"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="wrap_content"-->
-<!--    tools:ignore="MissingConstraints">-->
-<!--    <TextView-->
-<!--        android:text=""-->
-<!--        android:textStyle="normal"-->
-<!--        android:textColor="@color/white"-->
-<!--        android:textSize="30sp"-->
-<!--        android:layout_marginStart="15dp"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"/>-->
-<!--    <TextView-->
-<!--        android:text="Provinces"-->
-<!--        android:textStyle="bold"-->
-<!--        android:textColor="@color/white"-->
-<!--        android:textSize="33sp"-->
-<!--        android:layout_marginStart="15dp"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"/>-->
-
-
-<!--</LinearLayout>-->
-<!--<LinearLayout-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent">-->
-<!--    <ListView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:id="@+id/listview"-->
-<!--        android:scrollbars="vertical"-->
-<!--        android:layout_marginTop="180dp"-->
-<!--        tools:listitem="@layout/fragment_list_province"-->
-<!--        android:divider="@android:color/transparent"-->
-<!--        android:dividerHeight="10.0sp"/>-->
-<!--</LinearLayout>-->
-
-
-<!--</androidx.constraintlayout.widget.ConstraintLayout>-->
-
