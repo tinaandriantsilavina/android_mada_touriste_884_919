@@ -36,7 +36,7 @@
                     android:layout_width="0dp"
                     android:layout_height="70dp"
                     android:layout_weight="1"
-                    android:background="@drawable/ripple_effect_raised_bleu"
+                    android:background="@drawable/ripple_effect_raised_jaune"
                     android:gravity="center"
                     android:text="Photo"
                     android:textColor="@color/white"

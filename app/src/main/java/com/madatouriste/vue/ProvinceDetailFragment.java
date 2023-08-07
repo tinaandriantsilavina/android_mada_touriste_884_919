@@ -80,7 +80,6 @@ public class ProvinceDetailFragment extends Fragment {
         ColorMatrixColorFilter colorMatrixColorFilter = new ColorMatrixColorFilter(colorMatrix);
 //        i.setColorFilter(colorMatrixColorFilter);
 
-
         int shadowColor = Color.BLACK;
         float x = 10f;
         float y = 10f;
