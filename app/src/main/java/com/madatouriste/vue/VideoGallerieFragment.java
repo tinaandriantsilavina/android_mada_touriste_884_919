@@ -16,6 +16,7 @@ import com.madatouriste.modele.VideoModel;
 import com.madatouriste.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class VideoGallerieFragment extends Fragment {
@@ -39,9 +40,11 @@ public class VideoGallerieFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                ExoPlayerFragment video = new ExoPlayerFragment();
+                ExoPlayerVideoActivity video = new ExoPlayerVideoActivity();
                 video.setVideoPath(videoList.get(position));
-                Utils.fragmentNavig(getActivity(),video);
+                HashMap map =new HashMap<>();
+                map.put("path",videoList.get(position));
+                Utils.redirection(getActivity(), ExoPlayerVideoActivity.class, map);
             }
 
         });
