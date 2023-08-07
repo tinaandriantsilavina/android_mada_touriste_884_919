@@ -69,9 +69,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         }else if (((Integer)item.getItemId()).equals(R.id.recherche)){
             val =  Utils.fragmentNavig(this,rechercheFragment);
         }else if(((Integer)item.getItemId()).equals(R.id.profil)){
-//            val =  Utils.fragmentNavig(this, profilFragment);
-            ImageFullScreenCarouselFragment fr = new ImageFullScreenCarouselFragment();
-            Utils.fragmentNavig(this,fr);
+            val =  Utils.fragmentNavig(this, profilFragment);
+//            ImageFullScreenCarouselFragment fr = new ImageFullScreenCarouselFragment();
+//            Utils.fragmentNavig(this,fr);
         }else if(((Integer)item.getItemId()).equals(R.id.logout)){
             Utils.clearToken(MainActivity.this);
             HashMap map = new HashMap();
@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                
+                Utils.redirection(MainActivity.this, MainActivity.class, new HashMap<>());
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
