@@ -1,6 +1,8 @@
 package com.madatouriste.vue;
 
 import android.graphics.Color;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,10 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.madatouriste.R;
 import com.madatouriste.constant.ProvinceConstant;
@@ -59,9 +64,30 @@ public class ProvinceDetailFragment extends Fragment {
         }
     }
     public void initEntete(View v){
-        LinearLayout layout = v.findViewById(R.id.fragment_province_detail_layout);
-//        layout.setBackground();
-        TextView titre = layout.findViewById(R.id.fragment_province_detail_titre);
+        TextView titre = v.findViewById(R.id.fragment_province_detail_titre);
+        ImageView i =v.findViewById(R.id.img);
+        RequestOptions requestOptions = new RequestOptions()
+                .placeholder(R.drawable.baseline_image_24)
+                .error(R.drawable.baseline_broken_image_24);
+        Glide.with(getContext())
+                .load(province.getPdc())
+                .apply(requestOptions)
+                .into(i);
+
+        float brightnessFactor = 0.5f;
+        ColorMatrix colorMatrix = new ColorMatrix();
+        colorMatrix.setSaturation(1-brightnessFactor);
+        ColorMatrixColorFilter colorMatrixColorFilter = new ColorMatrixColorFilter(colorMatrix);
+//        i.setColorFilter(colorMatrixColorFilter);
+
+
+        int shadowColor = Color.BLACK;
+        float x = 10f;
+        float y = 10f;
+        float radiusShadow = 10f;
+        titre.setShadowLayer(radiusShadow,x,y,shadowColor);
+        i.setMinimumHeight(900);
+//        LinearLayout parent =
         titre.setText(province.getNom());
     }
     public void initDescription(View v){

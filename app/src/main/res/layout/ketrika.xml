@@ -16,6 +16,7 @@
         android:maxHeight="100dp"
         />
     <TextView
+        android:id="@+id/fragment_province_detail_titre"
         android:text="Ketrika"
         android:layout_marginTop="30dp"
         android:textStyle="bold"
@@ -31,6 +32,27 @@
         android:layout_marginTop="170dp"
         android:padding="10dp"
         android:background="@drawable/rounded_header_background">
+        <include
+            android:layout_gravity="center"
+            android:id="@+id/fragment_province_detail_includ_image"
+            layout="@layout/fragment_province_detail_menu"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_width="match_parent" />
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <include layout="@layout/fragment_province_detail_description"/>
+                <!--            <include layout="@layout/fragment_province_detail_lieu"/>-->
+                <include layout="@layout/fragment_province_detail_lien"/>
+
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 </RelativeLayout>
