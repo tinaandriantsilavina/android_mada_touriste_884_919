@@ -71,7 +71,6 @@ public class LieuDetailFragment extends Fragment {
         ColorMatrix colorMatrix = new ColorMatrix();
         colorMatrix.setSaturation(1-brightnessFactor);
         ColorMatrixColorFilter colorMatrixColorFilter = new ColorMatrixColorFilter(colorMatrix);
-//        i.setColorFilter(colorMatrixColorFilter);
 
         int shadowColor = Color.BLACK;
         float x = 10f;
@@ -124,7 +123,9 @@ public class LieuDetailFragment extends Fragment {
 //                Image
                 ImageGallerieFragment imageGallerieFragment = new ImageGallerieFragment();
                 imageGallerieFragment.setImageObjects(lieu.getImages());
-//                //imageGallerieFragment.setImageObjects(Utils.getImage());
+                //imageGallerieFragment.setImageObjects(Utils.getImage());
+
+
                 Utils.fragmentNavig(getActivity(), imageGallerieFragment);
 //                Toast.makeText(getActivity(), "Clic sur : Photo Lieu" , Toast.LENGTH_SHORT).show();
             }

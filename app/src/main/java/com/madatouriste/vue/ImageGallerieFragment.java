@@ -49,11 +49,13 @@ public class ImageGallerieFragment extends Fragment {
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                    String imageUrl = imageObjects.get(position);
                     ImageFullScreenFragment im = new ImageFullScreenFragment();
                     im.setImgPath(imageObjects.get(position));
                     Utils.fragmentNavig(getActivity(), im);
-//                    showDialogBox(imageUrl);
+
+//                    ImageFullScreenCarouselFragment imageGallerieFragment = new ImageFullScreenCarouselFragment();
+//                    imageGallerieFragment.setImagePaths(imageObjects);
+//                    Utils.fragmentNavig(getActivity(), imageGallerieFragment);
                 }
 
             });

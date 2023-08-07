@@ -15,12 +15,13 @@ import com.madatouriste.adapter.ImagePagerAdapter;
 import com.madatouriste.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class ImageFullScreenCarouselFragment extends Fragment {
 
 
-    private ArrayList<String> imagePaths;
+    private List<String> imagePaths;
     private ViewPager2 viewPager;
     private ImagePagerAdapter imagePagerAdapter;
 
@@ -45,9 +46,16 @@ public class ImageFullScreenCarouselFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_image_full_screen_carousel, container, false);
         viewPager = rootView.findViewById(R.id.viewPager);
-////        imagePaths.addAll(Utils.getImage());
-        imagePagerAdapter = new ImagePagerAdapter(Utils.getImage());
+        imagePagerAdapter = new ImagePagerAdapter(imagePaths);
         viewPager.setAdapter(imagePagerAdapter);
         return rootView;
+    }
+
+    public List<String> getImagePaths() {
+        return imagePaths;
+    }
+
+    public void setImagePaths(List<String> imagePaths) {
+        this.imagePaths = imagePaths;
     }
 }
