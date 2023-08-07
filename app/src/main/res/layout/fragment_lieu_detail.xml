@@ -24,7 +24,7 @@ tools:context=".vue.ImageFullViewActivity">
         android:textStyle="bold"
         android:textColor="@color/white"
         android:textSize="20sp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         android:layout_marginStart="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
@@ -32,7 +32,7 @@ tools:context=".vue.ImageFullViewActivity">
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_marginTop="160dp"
+    android:layout_marginTop="230dp"
     android:padding="10dp"
     android:background="@drawable/rounded_header_background">
     <include
@@ -42,7 +42,7 @@ tools:context=".vue.ImageFullViewActivity">
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="-70dp"
+        android:layout_marginTop="-80dp"
         android:layout_width="match_parent" />
     <ScrollView
         android:layout_width="match_parent"
