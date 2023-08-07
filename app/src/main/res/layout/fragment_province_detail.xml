@@ -33,6 +33,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_marginTop="220dp"
+        android:paddingBottom="30dp"
         android:padding="10dp"
         android:background="@drawable/rounded_header_background">
         <include
